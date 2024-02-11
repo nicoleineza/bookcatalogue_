@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        /* Resetting default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Setting the background image */
+        html {
+            background-image: url('../assets/login.webp'); 
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+        }
+        
+        /* Centering the login container vertically */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        
+        /* Styling for the login container */
+        .container {
+            background-color: #fff;
+            border: 1px solid goldenrod;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+        }
+       
+        /* Input styling */
+        .input {
+            margin: 10px 0;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        /* Button styling */
+        button {
+            background-color: aliceblue;
+            border: rgb(203, 199, 199);
+            border-radius: 5px;
+            color: #333;
+            cursor: pointer;
+            display: block;
+            font-size: 16px;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #68625c;
+            color: #637a8e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="input" placeholder="Enter your email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="input" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
