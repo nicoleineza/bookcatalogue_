@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-image: url('../assets/header.webp');
+            background-size: cover;
+            background-position: center;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            z-index: 1;
+            color: whitesmoke;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            margin: 20px auto;
+            width: 150px; /* Adjust width as needed */
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .testimonial {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Send video to the back */
+            object-fit: cover;
+        }
+        /* Flexbox for feature sections */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .feature {
+            flex-basis: calc(25% - 20px); /* Adjust width as needed */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .feature h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="video-background">
+        <source src="../assets/background4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <header>
+        <h1>Welcome to My Personal Finances</h1>
+        <p>Track Your Finances, Achieve Your Goals</p>
+    </header>
+    <div class="container">
+        <div class="features">
+            <div class="feature">
+                <h3>Expense Tracking</h3>
+                <p>Easily input and categorize your expenses.<br> 
+                    Our intuitive interface makes it simple to monitor where your money is going.</p>
+            </div>
+            <div class="feature">
+                <h3>Bill Reminders</h3>
+                <p>Set reminders for upcoming bills or expenses.<br> 
+                    Never miss a payment again with our convenient notification system.</p>
+            </div>
+            <div class="feature">
+                <h3>Financial Goals</h3>
+                <p>Set and track your financial goals.<br>
+                     Whether you're saving for a vacation or planning for retirement, we'll help you stay on track.</p>
+            </div>
+            <div class="feature">
+                <h3>Expense Breakdown</h3>
+                <p>Generate monthly and yearly expense breakdowns with interactive charts and graphs.<br>
+                     *Gain insights into your spending habits and make informed decisions.</p>
+            </div>
+        </div>
+        <a href="#" class="btn">Sign Up</a>
+        <p>Already have an account? <a href="login.html">Login Here</a></p>
+    </div>
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li>User-friendly interface</li>
+            <li>Secure and private</li>
+            <li>Customizable reminders and goals</li>
+            <li>Detailed expense analysis</li>
+            <li>Free to use with premium options available</li>
+        </ul>
+    </div>
+    <div class="testimonial container">
+        <h2>Testimonials:</h2>
+        <p>"I love how easy it is to track my expenses with My Finance Tracker. It's helped me save so much money!" - Sarah R.</p>
+        <p>"Thanks to My finance Tracker, I finally achieved my savings goal for a new car. Highly recommended!" - John D.</p>
+    </div>
+    <footer>
+        <div class="container">
+            <h2>Stay Connected:</h2>
+            <div class="social-icons">
+                <a href="#" target="_blank"><img src="../assets/facebookicon.jpg" alt="Facebook" width="40"></a>
+                <a href="#" target="_blank"><img src="../assets/instagram icon.jpg" alt="Instagram" width="40"></a>
+                <a href="#" target="_blank"><img src="../assets/x icon.png" alt="X" width="40"></a>
+            </div>
+            <h2>Contact Us:</h2>
+            <p>Have questions or feedback? We're here to help!</p>
+            <p>Email: info@myfinancetracker.com</p>
+            <p>Phone: 0234738924</p>
+        </div>
+    </footer>
+</body>
+</html>
