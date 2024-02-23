@@ -1,0 +1,7 @@
+
+#header{
+    font-family:"Poppins";
+    color: linear-gradient(to right,
+var(--primary-color),
+var(--primary-color-dark))
+}

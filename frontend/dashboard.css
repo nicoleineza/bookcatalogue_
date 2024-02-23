@@ -1,17 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-
-:root{
-        --primary-color:#5c48ee;
-        --primary-color-dark:#0f1e6a;
-        --secondary-color:#f9fafe;
-        --text-color:#333333;
-        --white:#ffffff;
-        --max-width:1200px;
-    
-    
-    }
-
+:root {
+    --main-color: #5459bd;
+    --color-dark: #8aa2eb;
+    --text-grey: #bec2c6;
+}
 
 * {
     padding: 0;
@@ -28,7 +21,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    background: var(--primary-color);
+    background: var(--main-color);
     z-index: 100;
     transition: width 300ms;
 }
@@ -116,7 +109,7 @@ header {
 }
 
 header h2 {
-    color:var(--text-color)
+    color: #222;
 }
 
 header label span {
@@ -158,7 +151,7 @@ header label span {
 
 .user-wrapper small {
     display: inline-block;
-    color: var(--text-color);
+    color: var(--text-grey);
     margin-top: -3px;
 }
 

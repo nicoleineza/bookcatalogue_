@@ -1,10 +1,26 @@
-*r
+
+:root{
+    --primary-color:#5c48ee;
+    --primary-color-dark:#0f1e6a;
+    --secondary-color:#f9fafe;
+    --text-color:#333333;
+    --white:#ffffff;
+    --max-width:1200px;
+
+
+}
+
+
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #642B73;  /* fallback for old browsers */
+    background:var(--primary-color);  
     background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background:linear-gradient(to right,
+    var(--primary-color),
+    var(--primary-color-dark));
+    color: var(--white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
     color: #fff;
     margin: 0;
@@ -41,13 +57,13 @@ h1 {
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
-    background-color: #ff69b4;
+    background-color: var(--primary-color);
     color: #fff;
     cursor: pointer;
 }
 
 .search-bar button:hover {
-    background-color: #9400d3;
+    background-color:var(--primary-color-dark);
 }
 
 .genre {

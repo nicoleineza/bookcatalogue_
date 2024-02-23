@@ -1,3 +1,19 @@
+
+:root{
+    --primary-color:#5c48ee;
+    --primary-color-dark:#0f1e6a;
+    --secondary-color:#f9fafe;
+    --text-color:#333333;
+    --white:#ffffff;
+    --max-width:1200px;
+
+
+}
+
+
+
+
+
 *{
     padding: 0;
     margin: 0;
@@ -95,7 +111,7 @@ body{
     color:  #fff;
     width:  170px;
     height:  50px;
-    background:  plum;
+    background: var(--primary-color);
     text-transform:  capitalize;
     margin-left:  30px;
     border-radius: 3px;
@@ -105,7 +121,7 @@ body{
     -o-transition: 0.3s linear; 
     transition: 0.3s linear;
 }
-.welcome-hero-btn:hover{/*background: #fd4043;*/background: #f43032;}
+.welcome-hero-btn:hover{/*background: #fd4043;*/background:var(--primary-color-dark);}
 
 .welcome-hero-btn svg {
     width:  14px;

@@ -9,11 +9,24 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+
+        :root{
+            --primary-color:#5c48ee;
+            --primary-color-dark:#0f1e6a;
+            --secondary-color:#f9fafe;
+            --text-color:#333333;
+            --white:#ffffff;
+            --max-width:1200px;
+
+
+}
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+            background: url(jaredd-craig-HH4WBGNyltc-unsplash.jpg)center/cover fixed;
             margin: 0;
             padding: 0;
+            
         }
 
         .container {
@@ -23,10 +36,12 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
         }
 
         h1 {
             text-align: center;
+            color:var(--primary-color)
         }
 
         .input-box {
@@ -66,7 +81,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color:var(--primary-color);
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -74,7 +89,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: var(--primary-color-dark);
         }
 
         .Login {
@@ -88,15 +103,29 @@
         .Login a:hover {
             text-decoration: underline;
         }
+
+
+        #header{
+            color:var(--primary-color);
+            transition: 0.3s;
+        }
+
+        #header:hover{
+            color:var(--primary-color-dark);
+        }
+
+
     </style>
 </head>
 <body>
-    <h1>GRINGOTTS</h1> <!-- Added heading -->
+    
     <div class="container">
         <!-- Form to be filled for registration -->
         <div id="error"></div>
         <form action="../actions/register_user_action.php" method="POST" class="Signup" id="registration" name="registration" onsubmit="return validation()">
-            <h1>Registration</h1>
+            <h1 id="header">GRINGOTTS</h1> 
+            <h1 >Welcome
+            </h1>
             <p id="result">head</p>
             <div class="input-box">
                 <div class="input-field">
