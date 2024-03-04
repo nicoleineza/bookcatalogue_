@@ -139,7 +139,7 @@
         <ul class="list-group list-group-flush">
           <li>
             <a
-              href="dashboard.html"
+              href="dashboard.php"
               class="list-group-item list-group-item-action align-items-center"
               id="side-bar-options"
             >
@@ -151,7 +151,7 @@
           </li>
           <li>
             <a
-              href="library.html"
+              href="library.php"
               class="list-group-item list-group-item-action align-items-center"
               id="side-bar-options"
             >
@@ -187,7 +187,7 @@
           </li>
           <li>
             <a
-              href="search.html"
+              href="search.php"
               class="list-group-item list-group-item-action align-items-center"
               id="side-bar-options"
             >
@@ -199,7 +199,7 @@
           </li>
           <li>
             <a
-              href="discover.html"
+              href="discover.php"
               class="list-group-item list-group-item-action align-items-center"
               id="side-bar-options"
             >
@@ -223,7 +223,7 @@
           </li>
           <li>
             <a
-              href="login.html"
+              href="login.php"
               class="list-group-item list-group-item-action align-items-center"
               id="side-bar-options"
             >
