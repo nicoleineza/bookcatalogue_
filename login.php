@@ -105,7 +105,7 @@
             alert("Please fill in all fields");
           } else {
             // Redirect to dashboard.html
-            window.location.href = "dashboard.html";
+            window.location.href = "dashboard.php";
           }
         });
     </script>
