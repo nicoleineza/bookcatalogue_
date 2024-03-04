@@ -175,7 +175,7 @@
                 <button name="register" type="submit" id="#register">Register</button>
             </div>
             <div class="Login">
-                <p>You can now <a href="./login.html">Log in</a></p>
+                <p>You can now <a href="./login.php">Log in</a></p>
             </div>
         </form>
     </div>
