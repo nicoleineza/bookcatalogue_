@@ -11,10 +11,10 @@
     <nav>
         <div class="nav_logo"><a href="">GRINGOTTS</a> </div>
         <ul class="nav_links">
-            <li class="link"><a href="landing.html">Home</a> </li>
+            <li class="link"><a href="landing.php">Home</a> </li>
             <li class="link"><a href="id=AboutUs">About us</a></li>
-            <li class="link"> <a href="discover.html">Discover</a></li>
-            <li class="link"><a href="signup.html" class="nav_btn">Register</a> </li>
+            <li class="link"> <a href="discover.php">Discover</a></li>
+            <li class="link"><a href="signup.php" class="nav_btn">Register</a> </li>
         </ul>
     </nav>
     <section class="container">
