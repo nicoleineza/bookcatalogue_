@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/landing.css">
+    <link rel="stylesheet" href="css/landing.css">
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />">
     <title>Landing Page</title>
 </head>
@@ -35,9 +35,9 @@
             </form>
         </div>
         <div id="img_container">
-            <img src="/assets/images/ioann-mark-kuznietsov-F_cHIM0Kcy4-unsplash.jpg" alt="A book lying open on a desk" id="img" height="300px" width="150px" >
+            <img src="assets/images/ioann-mark-kuznietsov-F_cHIM0Kcy4-unsplash.jpg" alt="A book lying open on a desk" id="img" height="300px" width="150px" >
             <!-- Updated ID for the second image -->
-            <img src="/assets/images/pexels-yaroslav-shuraev-5084674.jpg" alt="header" id="img2" height="350px"  width="200px"/>
+            <img src="assets/images/pexels-yaroslav-shuraev-5084674.jpg" alt="header" id="img2" height="350px"  width="200px"/>
             <div id="image_content">
                 <ul>
                     <li>Get 30 points for reading today's top book</li>
