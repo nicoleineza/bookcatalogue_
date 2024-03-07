@@ -6,7 +6,7 @@
     <title>GRINGOTTS</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
     <input type="checkbox" id="nav-toggle">
@@ -16,14 +16,14 @@
         </div>
         <div class="sidebar-menu">
             <ul>
-                <li><a href="dashboard.html" class="active"><span class="las la-home"></span> Dashboard</a></li>
-                <li><a href="library.html"><span class="las la-book"></span> Book Catalogue</a></li>
+                <li><a href="dashboard.php" class="active"><span class="las la-home"></span> Dashboard</a></li>
+                <li><a href="library.php"><span class="las la-book"></span> Book Catalogue</a></li>
                 <li><a href="#"><span class="las la-book-reader"></span> Reading Goals</a></li>
                 <li><a href="#"><span class="las la-medal"></span> Competitions</a></li>
-                <li><a href="search.html"><span class="las la-search"></span> search</a></li>
-                <li><a href="discover.html"><span class="las la-compass"></span> Discover</a></li>
+                <li><a href="search.php"><span class="las la-search"></span> search</a></li>
+                <li><a href="discover.php"><span class="las la-compass"></span> Discover</a></li>
                 <li><a href="#"><span class="las la-user"></span> Profile</a></li>
-                <li><a href="login.html"><span class="las la-sign-out-alt"></span> Sign out</a></li>
+                <li><a href="login.php"><span class="las la-sign-out-alt"></span> Sign out</a></li>
             </ul>
         </div>
     </div>
