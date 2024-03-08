@@ -1,49 +1,6 @@
 <?php
-include 'settings/connection.php';
-function display_categories($userID)
-{
-
-  $db = $GLOBALS['db'];
-  $result = $db->query("SELECT Category FROM Categories 
-  JOIN UserCategories ON Categories.CategoryID = UserCategories.CategoryID 
-  WHERE UserCategories.UserID = " . $userID . ";"); //placeholder, should use person logged in's categories
-
-  if (!$result) {
-    die("Query failed: " . $db->error);
-  }
-
-  $categories = $result->fetch_all(MYSQLI_ASSOC);
-
-  foreach ($categories as $category) {
-    echo ' <a href="#" class="list-group-item list-group-item-action">' . $category['Category'] . '</a>';
-  }
-}
-
-function display_books($userID)
-{
-  $db = $GLOBALS['db'];
-  $result = $db->query("SELECT Books.* FROM Books 
-  JOIN UserBooks ON Books.BookID = UserBooks.BookID 
-  WHERE UserBooks.UserID = " . $userID. " ;");
-
-  // Check if there are any books
-  if ($result->num_rows > 0) {
-    // Output each book
-    while ($row = $result->fetch_assoc()) {
-      echo '<div class="col-md-3">
-              <div class="card">
-                  <img src="' . $row['Cover'] . '" class="card-img-top" alt="Book Image" />
-                  <div class="card-body">
-                      <h5 class="card-title">' . $row['Title'] . '</h5>
-                  </div>
-              </div>
-          </div>';
-    }
-  } else {
-    echo "No books found.";
-  }
-}
-
+include 'functions/display_categories.php';
+//include 'functions/display_books.php';
 
 ?>
 
@@ -245,14 +202,54 @@ function display_books($userID)
           </div>
         </div>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9" id="book-container">
         <div class="row">
-          <?= display_books(1); ?>
+          <?= include "functions/display_books.php"; ?>
         </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $("#addCategoryModal .btn-primary").click(function() {
+        var categoryName = $("#addCategoryModal .form-control").val();
+        var userID = 1;
+
+        $.ajax({
+          type: "POST",
+          url: "functions/add_category.php",
+          data: {
+            categoryName: categoryName,
+            userID: userID
+          },
+          success: function(response) {
+            console.log(response);
+            location.reload();
+
+          }
+
+        });
+      });
+      $(document).on('click', '.category', function() {
+        var categoryID = $(this).data('category-id');
+        var userID = 1;
+        console.log("catclik");
+
+        // Call the display_books function with the selected categoryID
+        $.ajax({
+          type: "POST",
+          url: "functions/display_books.php",
+          data: {
+            userID: userID,
+            categoryID: categoryID
+          },
+          success: function(response) {
+            // Update the part of the page that displays the books
+            $('#book-container .row').html(response);
+          }
+        });
+      });
+    </script>
 
 
 
