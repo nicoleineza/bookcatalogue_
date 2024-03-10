@@ -15,7 +15,7 @@
         <title>Search Page</title>
 
         <!--style.css-->
-        <link rel="stylesheet" href="/css/search.css">
+        <link rel="stylesheet" href="/bookcatalogue_/css/search.css">
     </head>
 
 

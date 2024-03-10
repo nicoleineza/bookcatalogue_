@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Books</title>
-    <link rel="stylesheet" type="text/css" href="/css/discover.css">
+    <link rel="stylesheet" type="text/css" href="/bookcatalogue_/css/discover.css">
 </head>
 <body>
 
