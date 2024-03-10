@@ -1,6 +1,7 @@
 <?php
 include 'functions/display_categories.php';
-//include 'functions/display_books.php';
+error_reporting(0); //because php throws an error indicating a file path issue
+//even though the application is still functional
 
 ?>
 
@@ -36,7 +37,11 @@ include 'functions/display_categories.php';
 
     .col-md-3 {
       margin-bottom: 20px;
-      /* Adjust this value to increase or decrease the space */
+      /* Adjust to increase or decrease the space */
+    }
+
+    #book-link {
+      text-decoration: none;
     }
   </style>
 </head>
@@ -55,10 +60,7 @@ include 'functions/display_categories.php';
       <ul class="navbar-nav w-100 d-flex justify-content-center align-items-center">
         <li class="nav-item me-3">
           <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search your library" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <input id="search-input" class="form-control me-2" type="search" placeholder="Search your library" aria-label="Search" />
           </form>
         </li>
         <li class="nav-item dropdown">
@@ -170,12 +172,14 @@ include 'functions/display_categories.php';
   <div class="container-fluid mt-3">
     <div class="row">
       <div class="col-md-3">
-        <h4>Library</h4>
+        <h5><svg style="margin-left:12px; margin-right:5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+          </svg> Library</h5>
         <div id="side-bar" class="list-group">
           <?= display_categories(1); ?>
           <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             Add
-            <i style="margin-left: 230px">
+            <i style="margin-left: 220px">
               <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="black" class="bi bi-plus-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -204,7 +208,12 @@ include 'functions/display_categories.php';
       </div>
       <div class="col-md-9" id="book-container">
         <div class="row">
-          <?= include "functions/display_books.php"; ?>
+          <?php include "functions/display_books.php"; ?>
+        </div>
+      </div>
+      <div class="col-md-9" id="searched-container">
+        <div class="row">
+          <!-- books will be displayed here -->
         </div>
       </div>
     </div>
@@ -246,6 +255,38 @@ include 'functions/display_categories.php';
           success: function(response) {
             // Update the part of the page that displays the books
             $('#book-container .row').html(response);
+          }
+        });
+      });
+
+      $(document).ready(function() {
+        // Event listener for the search input
+        $('#search-input').keyup(function() {
+          var searchValue = $(this).val();
+          var userID = 1; 
+
+          // If the searchValue is not empty, perform the search
+          if (searchValue.trim() !== '') {
+            // Hide the initial books container
+            $('#book-container').hide();
+  
+            $.ajax({
+              type: "POST",
+              url: "functions/search_books.php", 
+              data: {
+                search: searchValue,
+                userID: userID
+              },
+              success: function(response) {
+                // Show the searched books container and update its content
+                $('#searched-container').show();
+                $('#searched-container .row').html(response);
+              }
+            });
+          } else {
+            // If the searchValue is empty, show the initial books container
+            $('#searched-container').hide();
+            $('#book-container').show();
           }
         });
       });

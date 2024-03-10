@@ -20,4 +20,6 @@ function display_categories($userID)
     foreach ($categories as $category) {
         echo '<a href="#" class="list-group-item list-group-item-action category" data-category-id="' . $category['CategoryID'] . '">' . $category['Category'] . '</a>';
     }
+
+    
 }

@@ -2,6 +2,7 @@
 
 include '../settings/connection.php';
 
+
 // Get the userID and categoryID from the POST variables, if they're set
 $userID = isset($_POST['userID']) ? $_POST['userID'] : 1; // default to 1
 $categoryID = isset($_POST['categoryID']) ? $_POST['categoryID'] : 'all'; // default to 'all'
@@ -27,12 +28,15 @@ function display_books($userID, $categoryID = 'all')
         // Output each book
         while ($row = $result->fetch_assoc()) {
             echo '<div class="col-md-3">
-                    <div class="card">
-                        <img src="' . $row['Cover'] . '" class="card-img-top" alt="Book Image" />
-                        <div class="card-body">
-                            <h5 class="card-title">' . $row['Title'] . '</h5>
+                    <a id="book-link" href="book_page.php">
+                        <div class="card">
+                            <img src="' . $row['Cover'] . '" class="card-img-top" alt="Book Image" />
+                            <div class="card-body">
+                                <h5 class="card-title">' . $row['Title'] . '</h5>
+                                <p class="card-text">' . $row['Author'] . '</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>    
                 </div>';
         }
     } else {
