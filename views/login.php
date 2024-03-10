@@ -31,7 +31,7 @@
         justify-content: center;
         height: 100%;
         font-family: Arial, sans-serif;
-        background-image: url("login.jpg");
+        background-image: url("/bookcatalogue_/assets/login.jpg");
         background-size: cover;
         background-position: center;
       }
@@ -74,7 +74,7 @@
   <body>
     <div id="header"><h1>Welcome to Gringotts</h1></div>
     <div class="container">
-      <form id="loginForm" action="dashboard.html">
+      <form id="loginForm" action="">
         <label for="username">username:</label>
         <input
           type="username"

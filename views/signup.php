@@ -23,7 +23,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: url(jaredd-craig-HH4WBGNyltc-unsplash.jpg)center/cover fixed;
+            background: url(/bookcatalogue_/assets/jaredd-craig-HH4WBGNyltc-unsplash.jpg)center/cover fixed;
             margin: 0;
             padding: 0;
             
