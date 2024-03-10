@@ -1,5 +1,5 @@
 <?php
 
-header("Location:/views/landing.php");
+header("Location:bookcatalogue_/views/landing.php");
 exit; 
 ?>
