@@ -10,25 +10,23 @@ $search = $_POST['search'];
 
 function search_books($userID, $search)
 {
-    global $db;
+    $db = $GLOBALS['db'];
 
-    // Prepare the SQL statement with placeholders
     $sql = "SELECT Books.* FROM Books 
             JOIN UserBooks ON Books.BookID = UserBooks.BookID 
             WHERE UserBooks.UserID = ? 
             AND (Books.Author LIKE CONCAT('%', ?, '%') 
             OR Books.Title LIKE CONCAT('%', ?, '%'))";
 
-    // Prepare the statement
+    
     $stmt = $db->prepare($sql);
 
-    // Bind the parameters to the placeholders
+    
     $stmt->bind_param("iss", $userID, $search, $search);
 
     // Execute the query
     $stmt->execute();
 
-    // Get the result
     $result = $stmt->get_result();
 
     // Check if there are any books
@@ -51,10 +49,8 @@ function search_books($userID, $search)
         echo "No books found.";
     }
 
-    // Close the statement
     $stmt->close();
 }
 
-// Call the function with the provided userID and search term
 search_books($userID, $search);
 ?>

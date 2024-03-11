@@ -20,9 +20,9 @@ include '../settings/connection.php';
 
      if ($db->query($sql) === TRUE) {
          $categoryID = $db->insert_id;
-         echo "New record created successfully in Categories. Last inserted ID is: " . $categoryID;
+         echo "New category added";
      } else {
-         echo "Error: " . $sql . "<br>" . $conn->error;
+         echo "Error: " . $sql . "<br>" . $db->error;
      }
  }
 
@@ -32,7 +32,6 @@ include '../settings/connection.php';
  if ($db->query($sql) === TRUE) {
      echo "New record created successfully in UserCategories";
  } else {
-     echo "Error: " . $sql . "<br>" . $conn->error;
+     echo "Error: " . $sql . "<br>" . $db->error;
  }
 
- $db->close();

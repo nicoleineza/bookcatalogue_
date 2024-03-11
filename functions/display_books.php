@@ -7,28 +7,42 @@ include '../settings/connection.php';
 $userID = isset($_POST['userID']) ? $_POST['userID'] : 1; // default to 1
 $categoryID = isset($_POST['categoryID']) ? $_POST['categoryID'] : 'all'; // default to 'all'
 
+
 function display_books($userID, $categoryID = 'all')
 {
     $db = $GLOBALS['db'];
 
-    $sql = "SELECT Books.* FROM Books 
-    JOIN UserBooks ON Books.BookID = UserBooks.BookID 
-    WHERE UserBooks.UserID = " . $userID;
 
+    $sql = "SELECT Books.* FROM Books 
+            JOIN UserBooks ON Books.BookID = UserBooks.BookID";
+
+    // If a specific category is selected, join with the bookcategories table
     if ($categoryID !== 'all') {
-        $sql .= " AND UserBooks.CategoryID = " . $categoryID;
+        $sql .= " JOIN BookCategories ON Books.BookID = BookCategories.BookID 
+                   AND BookCategories.CategoryID = ?";
     }
 
-    $sql .= ";";
+    $sql .= " WHERE UserBooks.UserID = ?";
 
-    $result = $db->query($sql);
+    $stmt = $db->prepare($sql);
+
+    if ($categoryID !== 'all') {
+        $stmt->bind_param("ii", $categoryID, $userID);
+    } else {
+        $stmt->bind_param("i", $userID);
+    }
+
+    // Execute the query
+    $stmt->execute();
+
+    $result = $stmt->get_result();
 
     // Check if there are any books
     if ($result->num_rows > 0) {
         // Output each book
         while ($row = $result->fetch_assoc()) {
             echo '<div class="col-md-3">
-                    <a id="book-link" href="book_page.php">
+                    <a id="book-link" href="book_page.php?bookID=' . $row['BookID'] . '">
                         <div class="card">
                             <img src="' . $row['Cover'] . '" class="card-img-top" alt="Book Image" />
                             <div class="card-body">
@@ -42,6 +56,9 @@ function display_books($userID, $categoryID = 'all')
     } else {
         echo "No books found.";
     }
+
+    $stmt->close();
 }
+
 
 display_books($userID, $categoryID);

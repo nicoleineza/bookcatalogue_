@@ -11,39 +11,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
 <head>
   <title>Library Page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-
-  <style>
-    .offcanvas {
-      width: 350px !important;
-    }
-
-    .offcanvas .list-group-item {
-      border: none;
-    }
-
-    #side-bar-options {
-      padding: 0.7rem 2rem;
-      /* Increase thickness of <li> */
-    }
-
-    .card-title {
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 18px;
-    }
-
-    .col-md-3 {
-      margin-bottom: 20px;
-      /* Adjust to increase or decrease the space */
-    }
-
-    #book-link {
-      text-decoration: none;
-    }
-  </style>
+  <link href="css/library.css" rel="stylesheet">
 </head>
 
 <body>
