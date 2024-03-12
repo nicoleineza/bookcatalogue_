@@ -8,6 +8,7 @@ CREATE TABLE `books` (
   `Cover` varchar(255) DEFAULT NULL,
   `ISBN` varchar(13) NOT NULL,
   `PublicationDate` date DEFAULT NULL,
+  `Description` varchar(3000),
   PRIMARY KEY (`BookID`),
   UNIQUE KEY `ISBN` (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -75,7 +76,7 @@ INSERT INTO `books` (`BookID`, `Author`, `Title`, `Cover`, `ISBN`, `PublicationD
 
 INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
 (1, 'Read'),
-(2, 'To Be Read'),
+(2, 'Want to Read'),
 (3, 'Currently Reading');
 
 
@@ -93,10 +94,8 @@ INSERT INTO `bookcategories` (`UserID`, `BookID`, `CategoryID`) VALUES
 (1, 1, 1),
 (1, 2, 2),
 (1, 3, 3),
-(1, 4, 3),
-(1, 5, 3),
-(1, 1, 2),
-(1, 2, 3);
+(1, 4, 1),
+(1, 5, 2);
 
 INSERT INTO `usercategories` (`UserID`, `CategoryID`) VALUES
 (1, 1),

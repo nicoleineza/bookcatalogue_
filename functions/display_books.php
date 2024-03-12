@@ -44,10 +44,10 @@ function display_books($userID, $categoryID = 'all')
             echo '<div class="col-md-3">
                     <a id="book-link" href="book_page.php?bookID=' . $row['BookID'] . '">
                         <div class="card">
-                            <img src="' . $row['Cover'] . '" class="card-img-top" alt="Book Image" />
+                            <img src="' . htmlspecialchars($row['Cover']) . '" class="card-img-top" alt="Book Image" />
                             <div class="card-body">
-                                <h5 class="card-title">' . $row['Title'] . '</h5>
-                                <p class="card-text">' . $row['Author'] . '</p>
+                                <h5 class="card-title">' . htmlspecialchars($row['Title']) . '</h5>
+                                <p class="card-text">' . htmlspecialchars($row['Author']) . '</p>
                             </div>
                         </div>
                     </a>    

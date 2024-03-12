@@ -9,7 +9,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
 <html>
 
 <head>
-  <title>Library Page</title>
+  <title>My Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="css/library.css" rel="stylesheet">
 </head>
@@ -185,80 +185,81 @@ error_reporting(0); //because php throws an error indicating a file path issue
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-      $("#addCategoryModal .btn-primary").click(function() {
-        var categoryName = $("#addCategoryModal .form-control").val();
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $("#addCategoryModal .btn-primary").click(function() {
+      var categoryName = $("#addCategoryModal .form-control").val();
+      var userID = 1;
+
+      $.ajax({
+        type: "POST",
+        url: "actions/add_category.php",
+        data: {
+          categoryName: categoryName,
+          userID: userID
+        },
+        success: function(response) {
+          console.log(response);
+          location.reload();
+
+        }
+
+      });
+    });
+    $(document).on('click', '.category', function() {
+      var categoryID = $(this).data('category-id');
+      var userID = 1;
+      console.log("catclik");
+
+      // Call the display_books function with the selected categoryID
+      $.ajax({
+        type: "POST",
+        url: "functions/display_books.php",
+        data: {
+          userID: userID,
+          categoryID: categoryID
+        },
+        success: function(response) {
+          // Update the part of the page that displays the books
+          $('#book-container .row').html(response);
+        }
+      });
+    });
+
+    $(document).ready(function() {
+      // Event listener for the search input
+      $('#search-input').keyup(function() {
+        var searchValue = $(this).val();
         var userID = 1;
 
-        $.ajax({
-          type: "POST",
-          url: "functions/add_category.php",
-          data: {
-            categoryName: categoryName,
-            userID: userID
-          },
-          success: function(response) {
-            console.log(response);
-            location.reload();
+        // If the searchValue is not empty, perform the search
+        if (searchValue.trim() !== '') {
+          // Hide the initial books container
+          $('#book-container').hide();
 
-          }
-
-        });
+          $.ajax({
+            type: "POST",
+            url: "functions/search_books.php",
+            data: {
+              search: searchValue,
+              userID: userID
+            },
+            success: function(response) {
+              // Show the searched books container and update its content
+              $('#searched-container').show();
+              $('#searched-container .row').html(response);
+            }
+          });
+        } else {
+          // If the searchValue is empty, show the initial books container
+          $('#searched-container').hide();
+          $('#book-container').show();
+        }
       });
-      $(document).on('click', '.category', function() {
-        var categoryID = $(this).data('category-id');
-        var userID = 1;
-        console.log("catclik");
-
-        // Call the display_books function with the selected categoryID
-        $.ajax({
-          type: "POST",
-          url: "functions/display_books.php",
-          data: {
-            userID: userID,
-            categoryID: categoryID
-          },
-          success: function(response) {
-            // Update the part of the page that displays the books
-            $('#book-container .row').html(response);
-          }
-        });
-      });
-
-      $(document).ready(function() {
-        // Event listener for the search input
-        $('#search-input').keyup(function() {
-          var searchValue = $(this).val();
-          var userID = 1; 
-
-          // If the searchValue is not empty, perform the search
-          if (searchValue.trim() !== '') {
-            // Hide the initial books container
-            $('#book-container').hide();
-  
-            $.ajax({
-              type: "POST",
-              url: "functions/search_books.php", 
-              data: {
-                search: searchValue,
-                userID: userID
-              },
-              success: function(response) {
-                // Show the searched books container and update its content
-                $('#searched-container').show();
-                $('#searched-container .row').html(response);
-              }
-            });
-          } else {
-            // If the searchValue is empty, show the initial books container
-            $('#searched-container').hide();
-            $('#book-container').show();
-          }
-        });
-      });
-    </script>
+    });
+  </script>
 
 
 
