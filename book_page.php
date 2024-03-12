@@ -275,8 +275,7 @@ function isChecked($shelfCategoryID, $categoryID)
                     'bookID': bookID
                 },
                 success: function(response) {
-                    // Handle success (you can update the UI or alert the user)
-                    alert('Status updated successfully.');
+                    //alert('Status updated successfully.');
                 },
                 error: function(xhr, status, error) {
                     // Handle errors
