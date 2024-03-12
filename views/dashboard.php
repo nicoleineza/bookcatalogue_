@@ -1,3 +1,9 @@
+<?php
+
+include '../settings/connection.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +27,7 @@
 
     <ul class="menu">
         <li>
-            <a href="dashboard.php" class="active">
+            <a href="../views/dashboard.php" class="active">
                 <i class='bx bx-home'></i>
                 <span>Dashboard</span>
             </a>
@@ -65,7 +71,7 @@
 
 
         <li class="logout">
-            <a href="login.php">
+            <a href="../login/logout_view.php">
                 <i class='bx bx-log-out'></i>
                 <span>Sign out</span>
             </a>
@@ -88,8 +94,25 @@
 
         <div class="user-info">
             <div class="user-details">
-                <img src="user-image.jpg" alt="User Image" width="40px" height="40px"><br>
-                <span class="user-name">User Name</span>
+                
+                <?php
+           session_start();
+
+            
+
+            if (isset($_SESSION['user_id'])) {
+                $id = $_SESSION['user_id'];
+                $query = "SELECT * FROM Users WHERE user_id = '$id'";
+                $result = mysqli_query($connection, $query);
+                $row = mysqli_fetch_assoc($result);
+
+                echo '<h3>'. $row['firstname'].' '. $row['lastname']. '</h3>';
+
+                
+                
+            } 
+            ?>
+                
             </div>
         </div>
     </div>

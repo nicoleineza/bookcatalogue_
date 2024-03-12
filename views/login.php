@@ -74,24 +74,25 @@
   <body>
     <div id="header"><h1>Welcome to Gringotts</h1></div>
     <div class="container">
-      <form id="loginForm" action="">
-        <label for="username">username:</label>
+      <form id="loginForm" name="login" action="../actions/login_user_action.php" method="POST">
+        <label for="email">email</label>
         <input
-          type="username"
+          name="email"
           id="username"
           class="input"
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           required
         />
         <label for="password">Password:</label>
         <input
           type="password"
+          name="psw"
           id="password"
           class="input"
           placeholder="Enter your password"
           required
         />
-        <button type="submit" id="loginButton">Login</button>
+        <button type="submit" id="login" name="login">Login</button>
       </form>
     </div>
     <script>

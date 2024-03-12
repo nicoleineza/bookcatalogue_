@@ -122,7 +122,7 @@
     <div class="container">
         <!-- Form to be filled for registration -->
         <div id="error"></div>
-        <form action="../actions/register_user_action.php" method="POST" class="Signup" id="registration" name="registration" onsubmit="return validation()">
+        <form action="../actions/signup_user_action.php" method="POST" class="Signup" id="registration" name="registration" onsubmit="return validation()">
             <h1 id="header">GRINGOTTS</h1> 
             <h1 >Welcome
             </h1>
@@ -163,7 +163,8 @@
             <div class="input-box">
                 <div class="input-field">
                     <label for="psw">Password</label>                    
-                    <input name="psw" type="password" pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" required id="psw">
+                    <input name="psw" type="password"  required id="psw">
+                    <!--pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}"-->
                 </div>
                 <div class="input-field">
                     <label for="psw2" >Confirm Password</label>
