@@ -1,188 +1,107 @@
-<?php
-
-include '../settings/connection.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="chore icon.png">
+    <link rel="icon" href="/bookcatalogue_/assets/icons/logo.png">
     <title>GRINGOTTS</title>
     <link rel="stylesheet" href="/bookcatalogue_/css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
-
 <body>
-<div class="sidebar">
-    <div class="logo">
-        <!--<img src="" width="100" height="100">-->
-    </div>
-
-
-    <ul class="menu">
-        <li>
-            <a href="../views/dashboard.php" class="active">
-                <i class='bx bx-home'></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="library.php">
-                <i class='bx bx-book'></i>
-                <span>Book Catalogue</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-book-reader'></i>
-                <span>Goals</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-medal'></i>
-                <span>Competitions</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-search'></i>
-                <span>Search</span>
-            </a>
-        </li>
-        <li>
-            <a href="discover.php">
-                <i class='bx bx-compass'></i>
-                <span>Discover</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-user'></i>
-                <span>Profile</span>
-            </a>
-        </li>
-
-
-        <li class="logout">
-            <a href="../login/logout_view.php">
-                <i class='bx bx-log-out'></i>
-                <span>Sign out</span>
-            </a>
-        </li>
-
-
-    </ul>
-
-
-</div>
-
-
-<div class="main">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <span>Welcome to</span>
-            <h2>User Dashboard</h2>
+    <header class="header">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1>
         </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="" class="dashboard" data-page="bookcatalogue_/views/dashboard.php">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/library.php">Book Catalogue</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/goals.php">Goals</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/competitions.php">Competitions</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/search.php">Search</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/discover.php">Discover</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/profile.php">Profile</a></li>
+                <li class="logout"><a href="../login/logout_view.php">Sign out</a></li>
+            </ul>
+        </nav>
+    </header>
 
-
-        <div class="user-info">
-            <div class="user-details">
-                
+    <main class="main">
+        <aside class="sidebar">
+            <div class="user-info">
                 <?php
-           session_start();
+                session_start();
+                if (isset($_SESSION['user_id'])) {
+                    $id = $_SESSION['user_id'];
+                    $query = "SELECT * FROM Users WHERE user_id = '$id'";
+                    $result = mysqli_query($connection, $query);
+                    $row = mysqli_fetch_assoc($result);
+                    echo '<h3>' . $row['firstname'] . ' ' . $row['lastname'] . '</h3>';
+                }
+                ?>
+            </div>
+        </aside>
 
-            
+        <div class="content" id="page-content">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+    </main>
 
-            if (isset($_SESSION['user_id'])) {
-                $id = $_SESSION['user_id'];
-                $query = "SELECT * FROM Users WHERE user_id = '$id'";
-                $result = mysqli_query($connection, $query);
-                $row = mysqli_fetch_assoc($result);
-
-                echo '<h3>'. $row['firstname'].' '. $row['lastname']. '</h3>';
-
-                
-                
-            } 
-            ?>
-                
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h2>GRINGOTTS</h2>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
             </div>
         </div>
-    </div>
-
-
-    <div class="statistics-container">
-        <h3 class="main-title">Activity</h3>
-        <div class="statistics-wrapper">
-            <a href="managechores.html" style="text-decoration: none;">
-                <div class="progress">
-                    <div class="progress-header">
-                        <div class="stats-value">
-                            <span class="title"><strong><i class='bx bx-line-chart'></i> Progress</strong></span>
-                        </div>
-                        <span class="value"><strong>5/10</strong><br>Way to Go!</span>
-                    </div>
-                </div>
-            </a>
-
-
-            <a href="goals.php" style="text-decoration: none;">
-                <div class="achievements">
-                    <div class="achievements-header">
-                        <div class="achievements-value">
-                            <span class="title"><strong><i class='bx bx-medal'></i>Achievements</strong></span>
-                        </div>
-                        <span class="value"><strong>0</strong></span>
-                    </div>
-                </div>
-            </a>
-
-
-            <a href="competitions.php" style="text-decoration: none;">
-                <div class="mywork">
-                    <div class="mywork-header">
-                        <div class="mywork-value">
-                            <span class="title"><strong><i class='bx bx-task'></i>My Work</strong></span>
-                        </div>
-                        <span class="value"><strong>0</strong></span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-<footer>
-    <div class="footer_container">
-        <div class="footer_logo">
-            <a href="#"></a>
-        </div>
-        <div class="footer_links">
+        <div class="footer-social">
             <ul>
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fas fa-times"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
             </ul>
         </div>
-    </div>
-    <div id="footer_social">
-       
-    </div>
-    <div class="footer_bottom">
-        <p>&copy; 2024 GRINGOTTS. All rights reserved.</p>
-    </div>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GRINGOTTS. All rights reserved.</p>
+        </div>
+    </footer>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageContent = document.getElementById('page-content');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                if (!page) return; 
+                if (page ==='dashboard'){
+                    window.location.href ='/bookcatalogue_/views/dashboard.php';
+                }
+                if (page === 'logout') {
+                    window.location.href = '../login/logout_view.php'; // Redirect to logout page
+                } else {
+                    fetch(page)
+                        .then(response => response.text())
+                        .then(data => {
+                            pageContent.innerHTML = data;
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
-
-
-
