@@ -30,6 +30,7 @@ CREATE TABLE `books` (
   `BookID` int(11) NOT NULL AUTO_INCREMENT,
   `Author` varchar(255) NOT NULL,
   `Title` varchar(255) NOT NULL,
+  `Genre` varchar(255) NOT NULL,
   `Cover` varchar(255) DEFAULT NULL,
   `ISBN` varchar(13) NOT NULL,
   `PublicationDate` date DEFAULT NULL,
@@ -50,7 +51,6 @@ CREATE TABLE `bookcategories` (
 CREATE TABLE `userbooks` (
   `UserID` int(11) NOT NULL,
   `BookID` int(11) NOT NULL,
-  `Genre` varchar(255) NOT NULL,
   PRIMARY KEY (`UserID`, `BookID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -137,12 +137,12 @@ CREATE TABLE `Publishing` (
   PRIMARY KEY (`publishing_id`),
   FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO `books` (`BookID`, `Author`, `Title`, `Cover`, `ISBN`, `PublicationDate`) VALUES
-(1, 'Matt Haig', 'The Midnight Library', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1602190253i/52578297.jpg', '978-3-16-1484', '2021-01-01'),
-(2, 'V.E. Schwab', 'The Invisible Life of Addie LaRue', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1584633432i/50623864.jpg', '978-0-7653-87', '2020-10-06'),
-(3, 'Taylor Jenkins Reid', 'The Seven Husbands of Evelyn Hugo', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1664458703i/32620332.jpg', '978-1-5111-34', '2017-06-13'),
-(4, 'Robert Jackson Bennet', 'The Tainted Cup', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689268335i/150247395.jpg', '978-1-5311-34', '2024-02-06'),
-(5, 'Heather Webb', 'Queens of London', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1682386426i/136276918.jpg', '978-1-5411-34', '2024-02-06');
+INSERT INTO `books` (`BookID`, `Author`, `Title`,`Genre`, `Cover`, `ISBN`, `PublicationDate`) VALUES
+(1, 'Matt Haig', 'The Midnight Library','horror', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1602190253i/52578297.jpg', '978-3-16-1484', '2021-01-01'),
+(2, 'V.E. Schwab', 'The Invisible Life of Addie LaRue','mystery','https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1584633432i/50623864.jpg', '978-0-7653-87', '2020-10-06'),
+(3, 'Taylor Jenkins Reid', 'The Seven Husbands of Evelyn Hugo','thriller', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1664458703i/32620332.jpg', '978-1-5111-34', '2017-06-13'),
+(4, 'Robert Jackson Bennet', 'The Tainted Cup', 'mystery','https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689268335i/150247395.jpg', '978-1-5311-34', '2024-02-06'),
+(5, 'Heather Webb', 'Queens of London', 'comedy','https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1682386426i/136276918.jpg', '978-1-5411-34', '2024-02-06');
 
 
 INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
@@ -154,12 +154,12 @@ INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
 INSERT INTO `users` (`UserID`, `UserName`) VALUES
 (1, 'Joel Kodji');
 
-INSERT INTO `userbooks` (`UserID`, `BookID`, `Genre`) VALUES
-(1, 1, 'horror'),
-(1, 2,'comedy'),
-(1, 3, 'thriller'),
-(1, 4,'mystery'),
-(1, 5,'adventure');
+INSERT INTO `userbooks` (`UserID`, `BookID`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5);
 
 INSERT INTO `bookcategories` (`UserID`, `BookID`, `CategoryID`) VALUES
 (1, 1, 1),
