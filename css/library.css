@@ -1,0 +1,32 @@
+.offcanvas {
+    width: 350px !important;
+  }
+
+  .offcanvas .list-group-item {
+    border: none;
+  }
+
+  #side-bar-options {
+    padding: 0.7rem 2rem;
+    /* Increase thickness of <li> */
+  }
+
+  .card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+  }
+
+  .col-md-3 {
+    margin-bottom: 20px;
+    /* Adjust to increase or decrease the space */
+  }
+
+  #book-link {
+    text-decoration: none;
+  }
+
+  
