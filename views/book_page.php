@@ -1,44 +1,12 @@
 <?php
-include 'settings/connection.php';
+//include '../settings/connection.php';
+
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
 $userID = 1;
 
-// Prepare a SQL query to fetch the book details
-$query = "SELECT Cover, Author, Title, ISBN, PublicationDate, `Description` FROM books WHERE BookID = ?";
-
-if ($stmt = $db->prepare($query)) {
-    $stmt->bind_param("i", $bookID);
-
-    $stmt->execute();
-
-    // Bind the result variables
-    $stmt->bind_result($cover, $author, $title, $isbn, $publicationDate, $description);
-    $stmt->fetch();
-    $stmt->close();
-}
-// Fetch the CategoryID for the book and user
-$query = "SELECT CategoryID FROM bookcategories WHERE UserID = ? AND BookID = ?";
-$stmt = $db->prepare($query);
-$stmt->bind_param("ii", $userID, $bookID);
-$stmt->execute();
-$result = $stmt->get_result();
-$shelfCategoryID = $result->fetch_assoc()['CategoryID'] ?? 'None'; // Default to 'None' if no category is set
-$stmt->close();
-
-// Define the status categories
-$status = [
-    'read' => "1",
-    'wantToRead' => "2",
-    'currentlyReading' => "3",
-    'None' => "None"
-];
+include '../functions/statuscheck.php';
 
 
-// Function to check if the radio button should be checked
-function isChecked($shelfCategoryID, $categoryID)
-{
-    return $shelfCategoryID == $categoryID ? "checked" : "";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +14,7 @@ function isChecked($shelfCategoryID, $categoryID)
 <head>
     <title><?= htmlspecialchars($title) ?> by <?= htmlspecialchars($author) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link href="css/book_page.css" rel="stylesheet">
+    <link href="../css/book_page.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -269,9 +237,9 @@ function isChecked($shelfCategoryID, $categoryID)
     $(document).ready(function() {
         $('input[type=radio][name=readingStatus]').change(function() {
             var status = this.value;
-            var bookID = <?= $bookID ?>; // Make sure this variable is set to the current book's ID
+            var bookID = <?= $bookID ?>; // Make sure this variable is set to the current book's ID 
             $.ajax({
-                url: 'actions/update_status.php', // The server-side script to handle the update
+                url: '../actions/update_status.php', // The server-side script to handle the update
                 type: 'POST',
                 data: {
                     'status': status,

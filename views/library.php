@@ -1,5 +1,5 @@
 <?php
-include 'functions/display_categories.php';
+include '../functions/display_categories.php';
 error_reporting(0); //because php throws an error indicating a file path issue
 //even though the application is still functional
 
@@ -11,7 +11,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
 <head>
   <title>My Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link href="css/library.css" rel="stylesheet">
+  <link href="../css/library.css" rel="stylesheet">
 </head>
 
 <body>
@@ -176,7 +176,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
       </div>
       <div class="col-md-9" id="book-container">
         <div class="row">
-          <?php include "functions/display_books.php"; ?>
+          <?php include "../functions/display_books.php"; ?>
         </div>
       </div>
       <div class="col-md-9" id="searched-container">
@@ -195,7 +195,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
 
       $.ajax({
         type: "POST",
-        url: "actions/add_category.php",
+        url: "../actions/add_category.php",
         data: {
           categoryName: categoryName,
           userID: userID
@@ -216,7 +216,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
       // Call the display_books function with the selected categoryID
       $.ajax({
         type: "POST",
-        url: "functions/display_books.php",
+        url: "../functions/display_books.php",
         data: {
           userID: userID,
           categoryID: categoryID

@@ -42,7 +42,7 @@ function display_books($userID, $categoryID = 'all')
         // Output each book
         while ($row = $result->fetch_assoc()) {
             echo '<div class="col-md-3">
-                    <a id="book-link" href="book_page.php?bookID=' . $row['BookID'] . '">
+                    <a id="book-link" href="../views/book_page.php?bookID=' . $row['BookID'] . '">
                         <div class="card">
                             <img src="' . htmlspecialchars($row['Cover']) . '" class="card-img-top" alt="Book Image" />
                             <div class="card-body">
