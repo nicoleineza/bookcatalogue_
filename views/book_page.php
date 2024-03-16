@@ -4,7 +4,7 @@
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
 $userID = 1;
 
-include '../functions/statuscheck.php';
+include 'bookcatalogue_/functions/statuscheck.php';
 
 
 ?>

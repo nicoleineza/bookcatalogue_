@@ -2,7 +2,7 @@
 include '../settings/connection.php';
 
 // Assuming $db is the database connection variable from your 'connection.php' file
-$db = $GLOBALS['db'];
+
 
 // Get the userID and search term from the POST variables
 $userID = $_POST['userID'];
@@ -10,7 +10,7 @@ $search = $_POST['search'];
 
 function search_books($userID, $search)
 {
-    $db = $GLOBALS['db'];
+    global $connection;
 
     $sql = "SELECT Books.* FROM Books 
             JOIN UserBooks ON Books.BookID = UserBooks.BookID 
@@ -19,7 +19,7 @@ function search_books($userID, $search)
             OR Books.Title LIKE CONCAT('%', ?, '%'))";
 
     
-    $stmt = $db->prepare($sql);
+    $stmt = $connection->prepare($sql);
 
     
     $stmt->bind_param("iss", $userID, $search, $search);

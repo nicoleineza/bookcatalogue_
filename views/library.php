@@ -1,17 +1,10 @@
-<?php
-include '../functions/display_categories.php';
-error_reporting(0); //because php throws an error indicating a file path issue
-//even though the application is still functional
-
-?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>My Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link href="../css/library.css" rel="stylesheet">
+  <link href="css/library.css" rel="stylesheet">
 </head>
 
 <body>
@@ -144,7 +137,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
             <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
           </svg> Library</h5>
         <div id="side-bar" class="list-group">
-          <?= display_categories(1); ?>
+          <?php include "../functions/display_categories.php"; ?>
           <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             Add
             <i style="margin-left: 220px">
@@ -155,23 +148,6 @@ error_reporting(0); //because php throws an error indicating a file path issue
             </i>
           </a>
 
-        </div>
-      </div>
-      <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addCategoryModalLabel">Add Category Name</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <input type="text" class="form-control" placeholder="Category Name">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Okay</button>
-            </div>
-          </div>
         </div>
       </div>
       <div class="col-md-9" id="book-container">
@@ -186,6 +162,24 @@ error_reporting(0); //because php throws an error indicating a file path issue
       </div>
     </div>
   </div>
+  <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCategoryModalLabel">Add Category Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" placeholder="Category Name">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
@@ -201,19 +195,14 @@ error_reporting(0); //because php throws an error indicating a file path issue
           userID: userID
         },
         success: function(response) {
-          //console.log(response);
           location.reload();
-
         }
-
       });
     });
     $(document).on('click', '.category', function() {
       var categoryID = $(this).data('category-id');
       var userID = 1;
-      console.log("catclik");
 
-      // Call the display_books function with the selected categoryID
       $.ajax({
         type: "POST",
         url: "../functions/display_books.php",
@@ -222,21 +211,17 @@ error_reporting(0); //because php throws an error indicating a file path issue
           categoryID: categoryID
         },
         success: function(response) {
-          // Update the part of the page that displays the books
           $('#book-container .row').html(response);
         }
       });
     });
 
     $(document).ready(function() {
-      // Event listener for the search input
       $('#search-input').keyup(function() {
         var searchValue = $(this).val();
         var userID = 1;
 
-        // If the searchValue is not empty, perform the search
         if (searchValue.trim() !== '') {
-          // Hide the initial books container
           $('#book-container').hide();
 
           $.ajax({
@@ -247,24 +232,17 @@ error_reporting(0); //because php throws an error indicating a file path issue
               userID: userID
             },
             success: function(response) {
-              // Show the searched books container and update its content
               $('#searched-container').show();
               $('#searched-container .row').html(response);
             }
           });
         } else {
-          // If the searchValue is empty, show the initial books container
           $('#searched-container').hide();
           $('#book-container').show();
         }
       });
     });
   </script>
-
-
-
-
-
 </body>
 
 </html>

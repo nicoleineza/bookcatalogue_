@@ -2,7 +2,7 @@
 
 <?php
 
-include "../settings/connection.php";
+include "bookcatalogue_/settings/connection.php";
 
 
 
@@ -115,7 +115,7 @@ if (!empty($errors)) {
                 }
 
             
-            header("Location: ../views/signup.php");
+            header("Location: ../bookcatalogue_/views/signup.php");
             exit();
         }
     } 

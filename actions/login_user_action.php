@@ -3,7 +3,7 @@
 session_start();
 
 //including the connection file
-include '../settings/connection.php';
+include 'bookcatalogue_/settings/connection.php';
 
 //initializing variable error for capturing errors
 $errors = array();
@@ -66,7 +66,7 @@ if(isset($_POST['login'])){
                 
 
                 //Leading the user to the dashboard
-                header("Location:../views/dashboard.php");
+                header("Location:bookcatalogue_/views/dashboard.php");
                 
             }    
 

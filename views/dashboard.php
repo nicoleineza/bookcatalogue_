@@ -1,3 +1,6 @@
+<?php
+ include "bookcatalogue_/settings/connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,7 @@
         <nav class="nav">
             <ul>
                 <li><a href="" class="dashboard" data-page="bookcatalogue_/views/dashboard.php">Home</a></li>
-                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/library.php">Book Catalogue</a></li>
+                <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/library.php">Library</a></li>
                 <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/goals.php">Goals</a></li>
                 <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/competitions.php">Competitions</a></li>
                 <li><a href="#" class="nav-link" data-page="/bookcatalogue_/views/search.php">Search</a></li>
