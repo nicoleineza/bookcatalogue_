@@ -33,6 +33,7 @@ $status = [
     'None' => "None"
 ];
 
+
 // Function to check if the radio button should be checked
 function isChecked($shelfCategoryID, $categoryID)
 {
@@ -212,12 +213,14 @@ function isChecked($shelfCategoryID, $categoryID)
             </div>
 
             <div class="col-md-8">
-                <h2><?= htmlspecialchars($title) ?></h2>
-                <p><?= htmlspecialchars($author) ?></p>
+                <div>
+                    <h2 style="color: #333;"><?= htmlspecialchars($title) ?></h2>
+                    <p style="font-size: 18px; color: #555;"><strong>Author:</strong> <?= htmlspecialchars($author) ?></p>
+                    <p style="text-align: justify; color: #666;"><?= htmlspecialchars($description) ?></p>
+                    <p style="color: #777;"><strong>First published on:</strong> <?= htmlspecialchars($publicationDate) ?></p>
+                    <p style="color: #777;"><strong>ISBN:</strong> <?= htmlspecialchars($isbn) ?></p>
+                </div>
 
-                <p><?= htmlspecialchars($description) ?></p>
-                <span>First published on <?= htmlspecialchars($publicationDate) ?></span> <br>
-                <span>ISBN <?= htmlspecialchars($isbn) ?> </span>
                 <hr>
                 <h3>Write a Review</h3>
                 <textarea id="reviewText" class="form-control" rows="5" maxlength="4000" placeholder="Write your review here..."></textarea>

@@ -6,6 +6,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'], $_POST['book
     $newStatus = $_POST['status'];
     $bookID = $_POST['bookID'];
 
+    $query = "SELECT * FROM userbooks WHERE bookID = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $bookID);
+    $stmt->execute();
+    $stmt_result = $stmt->get_result();
+    $stmt->close();
+
+    if ($stmt_result->num_rows == 0) {
+        $addBookQuery = "INSERT INTO userbooks (UserID, BookID) VALUES (?, ?)";
+        $addBookStmt = $db->prepare($addBookQuery);
+        $addBookStmt->bind_param("ii", $userID, $bookID);
+        $addBookStmt->execute();
+        $addBookStmt->close();
+    }
+
     // Start transaction
     $db->begin_transaction();
 

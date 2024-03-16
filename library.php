@@ -201,7 +201,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
           userID: userID
         },
         success: function(response) {
-          console.log(response);
+          //console.log(response);
           location.reload();
 
         }
