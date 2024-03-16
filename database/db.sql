@@ -50,6 +50,7 @@ CREATE TABLE `bookcategories` (
 CREATE TABLE `userbooks` (
   `UserID` int(11) NOT NULL,
   `BookID` int(11) NOT NULL,
+  `Genre` varchar(255) NOT NULL,
   PRIMARY KEY (`UserID`, `BookID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -153,12 +154,12 @@ INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
 INSERT INTO `users` (`UserID`, `UserName`) VALUES
 (1, 'Joel Kodji');
 
-INSERT INTO `userbooks` (`UserID`, `BookID`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5);
+INSERT INTO `userbooks` (`UserID`, `BookID`, `Genre`) VALUES
+(1, 1, 'horror'),
+(1, 2,'comedy'),
+(1, 3, 'thriller'),
+(1, 4,'mystery'),
+(1, 5,'adventure');
 
 INSERT INTO `bookcategories` (`UserID`, `BookID`, `CategoryID`) VALUES
 (1, 1, 1),
