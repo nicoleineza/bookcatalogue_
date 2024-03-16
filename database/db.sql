@@ -38,6 +38,19 @@ CREATE TABLE `books` (
   PRIMARY KEY (`BookID`),
   UNIQUE KEY `ISBN` (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `categories` (
+  `CategoryID` INT(11) NOT NULL AUTO_INCREMENT,
+  `Category` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`CategoryID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `userbooks` (
+  `UserID` int(11) NOT NULL,
+  `BookID` int(11) NOT NULL,
+  PRIMARY KEY (`UserID`, `BookID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 CREATE TABLE `bookcategories` (
   `UserID` int(11) NOT NULL,
   `BookID` int(11) NOT NULL,
@@ -48,17 +61,13 @@ CREATE TABLE `bookcategories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE `userbooks` (
-  `UserID` int(11) NOT NULL,
-  `BookID` int(11) NOT NULL,
-  PRIMARY KEY (`UserID`, `BookID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 CREATE TABLE `usercategories` (
   `UserID` int(11) NOT NULL,
   `CategoryID` int(11) NOT NULL,
   PRIMARY KEY (`UserID`, `CategoryID`),
-  FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  FOREIGN KEY (`UserID`) REFERENCES `Users` (`user_id`),
   FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 -- Summary table
@@ -70,7 +79,7 @@ CREATE TABLE `Summary` (
   
   PRIMARY KEY (`summary_id`),
   FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`),
-  FOREIGN KEY (`book_id`) REFERENCES `Books`(`book_id`)
+  FOREIGN KEY (`book_id`) REFERENCES `books`(`BookID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -103,7 +112,7 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`user_id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`);
 -- Goals table
 CREATE TABLE `Goals` (
@@ -151,8 +160,6 @@ INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
 (3, 'Currently Reading');
 
 
-INSERT INTO `users` (`UserID`, `UserName`) VALUES
-(1, 'Joel Kodji');
 
 INSERT INTO `userbooks` (`UserID`, `BookID`) VALUES
 (1, 1),
@@ -168,7 +175,3 @@ INSERT INTO `bookcategories` (`UserID`, `BookID`, `CategoryID`) VALUES
 (1, 4, 1),
 (1, 5, 2);
 
-INSERT INTO `usercategories` (`UserID`, `CategoryID`) VALUES
-(1, 1),
-(1, 2),
-(1, 3);
