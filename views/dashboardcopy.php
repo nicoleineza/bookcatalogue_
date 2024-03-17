@@ -138,7 +138,7 @@ if ($result_annual && mysqli_num_rows($result_annual) > 0) {
         
         <nav class="nav">
             <ul>
-                <li><a href="/bookcatalogue_/views/dashboard.php" class="dashboard">Home</a></li>
+                <li><a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard">Home</a></li>
                 <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
                 <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
                 <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
