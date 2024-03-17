@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -15,7 +17,7 @@
         <title>Search Page</title>
 
         <!--style.css-->
-        <link rel="stylesheet" href="/bookcatalogue_/css/search.css">
+        <link rel="stylesheet" href="../css/search.css">
     </head>
 
 
@@ -34,25 +36,65 @@
                 Discover, Connect, Read: Where Bookworms Unite! with just One click 
             </p>
         </div>
-        <div class="welcome-hero-serch-box">
-            <div class="welcome-hero-form">
-                <div class="single-welcome-hero-form">
-                    <h3>location</h3>
-                    <form>
-                        <input type="text" placeholder="Ex: london, newyork, rome" />
-                    </form>
+        
                     
-                </div>
-            </div>
-            <div class="welcome-hero-serch">
-                <button class="welcome-hero-btn" onclick="window.location.href='#'">
-                     search  <i data-feather="search"></i> 
+                   
+                    
+                <button class="welcome-hero-btn" name="genrebtn" id="genrebtn">
+                     Connect  <i data-feather="search"></i> 
                 </button>
-            </div>
-        </div>
+            
+                    
+               
+
     </div>
 
 
 </section>
+
+
+<!-- Table to display users -->
+<div id="usersTableContainer">
+        <table id="usersTable">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Genres Read</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <?php 
+                include ('../actions/search_user_action.php');
+                foreach ($userData as $user): ?>
+                    <tr>
+                        <td><?php echo $user['firstname']; ?></td>
+                        <td><?php echo $user['lastname']; ?></td>
+                        <td><?php echo $user['email']; ?></td>
+                        <td><?php echo $user['Genres_Read']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#genrebtn').click(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: '../actions/search_user_action.php',
+                    
+                });
+            });
+
+            
+        });
+    </script>
+
+
 </body>
 </html>
