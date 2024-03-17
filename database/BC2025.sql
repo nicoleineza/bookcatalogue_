@@ -1,8 +1,8 @@
 -- Book Catalogue Database SQL Dump
 -- Version: 1.0
 
-CREATE DATABASE IF NOT EXISTS `book_catalogue` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `book_catalogue`;
+CREATE DATABASE IF NOT EXISTS `BC2025` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `BC2025`;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+02:00";

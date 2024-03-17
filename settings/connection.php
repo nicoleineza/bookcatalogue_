@@ -2,7 +2,7 @@
 
 // Check if constants are not already defined before defining them
 if (!defined('DB_SERVER')) {
-    define('DB_SERVER', '127.0.0.1');
+    define('DB_SERVER', '18.133.105.23');
 }
 
 if (!defined('DB_USERNAME')) {
@@ -14,7 +14,7 @@ if (!defined('DB_PASSWORD')) {
 }
 
 if (!defined('DB_NAME')) {
-    define('DB_NAME', 'book_catalogue');
+    define('DB_NAME', 'BC2025');
 }
 
 // Establish database connection
