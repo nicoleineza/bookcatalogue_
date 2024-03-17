@@ -1,5 +1,5 @@
 <?php
-include '../bookcatalogue_/settings/connection.php';
+include ('../settings/connection.php');
 $userID = 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'], $_POST['bookID'])) {

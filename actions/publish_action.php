@@ -1,5 +1,5 @@
 <?php
-include '(../settings/connection.php)';
+include ("../settings/connection.php");
 
 // Function to add a new story to the database
 function addStory($title, $content, $author) {

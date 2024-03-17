@@ -1,5 +1,5 @@
 <?php
-include '../bookcatalogue_/settings/connection.php';
+include '(../settings/connection.php)';
 
 // Get the userID and categoryID from the POST variables, if they're set
 $userID = isset($_POST['userID']) ? $_POST['userID'] : 1; // default to 1
