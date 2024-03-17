@@ -5,12 +5,12 @@ session_start();
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page or handle unauthorized access
-    header("Location: /bookcatalogue_/views/login.php");
+    header("Location: ../bookcatalogue_/views/login.php");
     exit();
 }
 
 // Include database connection
-include_once '/bookcatalogue_/settings/connection.php';
+include_once '../bookcatalogue_/settings/connection.php';
 
 // Get user ID from session
 $user_id = $_SESSION['user_id'];

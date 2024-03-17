@@ -1,5 +1,5 @@
 <?php
-include '../settings/connection.php';
+include '..bookcatalogue_/settings/connection.php';
 
 function display_categories($userID)
 {

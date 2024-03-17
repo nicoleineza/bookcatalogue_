@@ -5,12 +5,12 @@ session_start();
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page or handle unauthorized access
-    header("Location: /bookcatalogue_/views/login.php");
+    header("Location: ../bookcatalogue_/views/login.php");
     exit();
 }
 
 // Include database connection
-include_once '../settings/connection.php'; // Adjust the path as needed
+include_once '..bookcatalogue_/settings/connection.php'; // Adjust the path as needed
 
 // Function to handle goal insertion and redirection
 function insertOrUpdateGoal($connection, $user_id, $goal_type, $goal_value, $redirect_page) {
@@ -22,7 +22,7 @@ function insertOrUpdateGoal($connection, $user_id, $goal_type, $goal_value, $red
         $sql_update = "UPDATE Goals SET goal_value = '$goal_value' WHERE user_id = '$user_id' AND goal_type = '$goal_type'";
         if (mysqli_query($connection, $sql_update)) {
             // Goal value updated successfully
-            header("Location: /bookcatalogue_/views/dashboard.php");
+            header("Location: ../bookcatalogue_/views/dashboard.php");
             exit();
         } else {
             // Error updating goal value
@@ -33,7 +33,7 @@ function insertOrUpdateGoal($connection, $user_id, $goal_type, $goal_value, $red
         $sql_insert = "INSERT INTO Goals (user_id, goal_type, goal_value) VALUES ('$user_id', '$goal_type', '$goal_value')";
         if (mysqli_query($connection, $sql_insert)) {
             // Goal inserted successfully
-            header("Location: /bookcatalogue_/views/dashboard.php");
+            header("Location: ../bookcatalogue_/views/dashboard.php");
             exit();
         } else {
             // Error inserting goal
@@ -50,7 +50,7 @@ if(isset($_POST['set_annual_goal'])) {
     // Check if annual goal is valid
     if ($annual_goal === false || $annual_goal < 0) {
         // Redirect back to the page with an error message
-        header("Location: /bookcatalogue_/views/dashboard.php?error=invalid_annual_goal");
+        header("Location: ../bookcatalogue_/views/dashboard.php?error=invalid_annual_goal");
         exit();
     }
 
@@ -66,7 +66,7 @@ if(isset($_POST['set_monthly_goal'])) {
     // Check if monthly goal is valid
     if ($monthly_goal === false || $monthly_goal < 0) {
         // Redirect back to the page with an error message
-        header("Location: /bookcatalogue_/views/dashboard.php?error=invalid_monthly_goal");
+        header("Location: ../bookcatalogue_/views/dashboard.php?error=invalid_monthly_goal");
         exit();
     }
 

@@ -1,5 +1,5 @@
 <?php
-include '../settings/connection.php';
+include '..bookcatalogue_/settings/connection.php';
 
 // Assuming $db is the database connection variable from your 'connection.php' file
 

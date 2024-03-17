@@ -1,5 +1,5 @@
 <?php
-include 'bookcatalogue_/settings/connection.php';
+include '../bookcatalogue_/settings/connection.php';
 
 
  // Get the category name from the AJAX request
