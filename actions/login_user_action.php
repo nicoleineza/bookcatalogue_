@@ -3,7 +3,7 @@
 session_start();
 
 //including the connection file
-include 'bookcatalogue_/settings/connection.php';
+include '../bookcatalogue_/settings/connection.php';
 
 //initializing variable error for capturing errors
 $errors = array();

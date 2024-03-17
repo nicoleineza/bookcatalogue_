@@ -1,5 +1,5 @@
 <?php
-include 'bookcatalogue_/settings/connection.php';
+include '../bookcatalogue_/settings/connection.php';
 
 // Function to add a new story to the database
 function addStory($title, $content, $author) {

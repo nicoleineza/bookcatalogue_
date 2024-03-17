@@ -2,7 +2,7 @@
 
 <?php
 
-include "bookcatalogue_/settings/connection.php";
+include "../bookcatalogue_/settings/connection.php";
 
 
 
