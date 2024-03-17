@@ -61,7 +61,7 @@
 <!--welcome-hero start -->
 <section id="home" class="welcome-hero">
 <video autoplay loop muted class="welcome-hero-video">
-            <source src="/bookcatalogue_/assets/video/Readingvideo.mp4" type="video/mp4" width="300">
+            <source src="../assets/video/Readingvideo.mp4" type="video/mp4" width="300">
             <!-- Add other video formats if needed -->
         </video>
     <div class="container">
@@ -85,7 +85,7 @@
 
 <!-- Table to display users -->
 <?php
-    include '/bookcatalogue_/actions/competition_action.php';
+    include ('../actions/competition_action.php');
     if ($userData !== null) {
         echo '<div class="usersTableContainer">
             <table class="usersTable">
@@ -119,7 +119,7 @@
             $('#genrebtn').click(function() {
                 $.ajax({
                     type: 'GET',
-                    url: '/bookcatalogue_/actions/competition_action.php',
+                    url: ('../actions/competition_action.php'),
                     
                 });
             });

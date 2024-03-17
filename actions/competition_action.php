@@ -1,6 +1,6 @@
 <?php
 //including the connection file
-include '/bookcatalogue_/settings/connection.php';
+include ('../settings/connection.php');
 
 
 
