@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Include database connection
-include_once '..bookcatalogue_/settings/connection.php'; // Adjust the path as needed
+include ('../settings/connection.php'); // Adjust the path as needed
 
 // Function to handle goal insertion and redirection
 function insertOrUpdateGoal($connection, $user_id, $goal_type, $goal_value, $redirect_page) {

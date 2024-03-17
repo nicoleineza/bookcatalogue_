@@ -1,6 +1,6 @@
 <?php
-include '../settings/connection.php';
-include'../functions/getuser.php';
+include ('../settings/connection.php');
+include('../functions/getuser.php');
 
 // Function to fetch user data from the database
 function getUserData($conn, $userId) {
