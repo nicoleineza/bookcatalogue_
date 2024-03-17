@@ -2,7 +2,7 @@
 
 // Check if constants are not already defined before defining them
 if (!defined('DB_SERVER')) {
-    define('DB_SERVER', '18.133.105.23');
+    define('DB_SERVER', '127.0.0.1');
 }
 
 if (!defined('DB_USERNAME')) {
