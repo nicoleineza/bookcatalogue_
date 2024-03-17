@@ -10,7 +10,7 @@ if (!defined('DB_USERNAME')) {
 }
 
 if (!defined('DB_PASSWORD')) {
-    define('DB_PASSWORD', '');
+    define('DB_PASSWORD', 'cs341webTech');
 }
 
 if (!defined('DB_NAME')) {
