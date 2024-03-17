@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write Your Story</title>
-    <link rel="stylesheet" type="text/css" href="../bookcatalogue_/css/publish.css">
+    <link rel="stylesheet" type="text/css" href="../css/publish.css">
 </head>
 <body>
 <body>
