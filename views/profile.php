@@ -2,78 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="/bookcatalogue_/css/profile.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>User Profile</h1>
-        <!-- Display feedback message here -->
-        <div id="message"></div>
-        <form id="profileForm" method="POST">
-            <div class="input-field">
-                <label for="firstname">Firstname</label>
-                <input name="firstname" type="text" value="<?php echo $user['firstname']; ?>" readonly>
-                <button type="button" onclick="toggleEdit('firstname')">Edit</button>
-            </div>
-            <div class="input-field">
-                <label for="lastname">Lastname</label>
-                <input name="lastname" type="text" value="<?php echo $user['lastname']; ?>" readonly>
-                <button type="button" onclick="toggleEdit('lastname')">Edit</button>
-            </div>
-            <div class="input-field">
-                <label for="email">Email:</label>
-                <input name="email" type="email" value="<?php echo $user['email']; ?>" readonly>
-                <button type="button" onclick="toggleEdit('email')">Edit</button>
-            </div>
-            <div class="input-field">
-                <label for="phone">Phone Number:</label>
-                <input type="tel" name="phone" value="<?php echo $user['phone']; ?>" readonly>
-                <button type="button" onclick="toggleEdit('phone')">Edit</button>
-            </div>
-            <button type="submit">Update Profile</button>
-        </form>
-    </div>
+    <h1>User Profile</h1>
+    <?php
+    // Start the session
+    session_start();
+    
+    // Check if the user is logged in
+    if(isset($_SESSION['user_id'])) {
+        // Fetch user information from session
+        $user_id = $_SESSION['user_id'];
+        
+        // Include database connection
+        include_once '../settings/connection.php';
+
+        $stmt = $connection->prepare("SELECT * FROM Users WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+    ?>
+    <form id="profile-form" method="post" action="update_profile.php">
+        <label for="firstname">First Name:</label>
+        <div id="firstname-container">
+            <span id="firstname-value"><?php echo htmlspecialchars($user['firstname']); ?></span>
+            <button type="button" class="edit-btn" data-field="firstname">Edit</button>
+        </div>
+
+        <label for="lastname">Last Name:</label>
+        <div id="lastname-container">
+            <span id="lastname-value"><?php echo htmlspecialchars($user['lastname']); ?></span>
+            <button type="button" class="edit-btn" data-field="lastname">Edit</button>
+        </div>
+
+        <label for="email">Email:</label>
+        <div id="email-container">
+            <span id="email-value"><?php echo htmlspecialchars($user['email']); ?></span>
+            <button type="button" class="edit-btn" data-field="email">Edit</button>
+        </div>
+
+        <label for="phone">Phone:</label>
+        <div id="phone-container">
+            <span id="phone-value"><?php echo htmlspecialchars($user['phone']); ?></span>
+            <button type="button" class="edit-btn" data-field="phone">Edit</button>
+        </div>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit" id="submit-btn" style="display: none;">Update Profile</button>
+    </form>
+
     <script>
-        function toggleEdit(field) {
-            var inputField = document.getElementsByName(field)[0];
-            var editButton = inputField.nextElementSibling;
-            if (inputField.readOnly) {
-                inputField.readOnly = false;
-                editButton.textContent = "Save";
-            } else {
-                inputField.readOnly = true;
-                editButton.textContent = "Edit";
-            }
-        }
+    $(document).ready(function() {
+        // Edit button click event
+        $('.edit-btn').click(function() {
+            var field = $(this).data('field');
+            var container = $('#' + field + '-container');
+            var value = $('#' + field + '-value').text();
 
-        // Submit the form using AJAX
-        document.getElementById("profileForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            var form = this;
-            var formData = new FormData(form); // Create FormData object from form
-            var xhr = new XMLHttpRequest(); // Create new XMLHttpRequest object
+            // Replace span with input field and submit button
+            container.html('<input type="text" id="' + field + '-input" name="' + field + '" value="' + value + '"> <button type="button" class="submit-btn">Submit</button>');
 
-            // Configure XMLHttpRequest
-            xhr.open(form.method, form.action, true);
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Set header to identify AJAX request
-
-            // Define function to handle AJAX response
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 400) { // Check for successful response
-                    var response = xhr.responseText; // Get response from server
-                    document.getElementById("message").innerHTML = response; // Display response message
-                } else {
-                    console.error("Request failed: " + xhr.status); // Log error if request fails
-                }
-            };
-
-            // Send AJAX request
-            xhr.send(formData);
+            // Show submit button
+            $('#submit-btn').show();
         });
+
+        // Submit button click event
+        $(document).on('click', '.submit-btn', function() {
+            $('#profile-form').submit();
+        });
+
+        // Profile form submission
+        $('#profile-form').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "update_profile.php",
+                data: formData,
+                success: function(response) {
+                    // Reload page if update is successful
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
     </script>
+    <?php 
+        } else {
+            echo "<p>Error: User data not found.</p>";
+        }
+    } else {
+        // If the user is not logged in, display a message or redirect to the login page
+        echo "<p>Please login to view your profile.</p>";
+        // You can add a link to the login page here if needed
+    }
+    ?>
 </body>
 </html>
