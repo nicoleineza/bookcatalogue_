@@ -6,11 +6,11 @@ if (!defined('DB_SERVER')) {
 }
 
 if (!defined('DB_USERNAME')) {
-    define('DB_USERNAME', 'root');
+    define('DB_USERNAME', 'gringotts');
 }
 
 if (!defined('DB_PASSWORD')) {
-    define('DB_PASSWORD', 'cs341webTech');
+    define('DB_PASSWORD', '123456');
 }
 
 if (!defined('DB_NAME')) {
@@ -18,7 +18,7 @@ if (!defined('DB_NAME')) {
 }
 
 // Establish database connection
-$connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$connection = mysqli_connect($DB_SERVER,$DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 
 // Check if the connection was successful
 if (!$connection) {
