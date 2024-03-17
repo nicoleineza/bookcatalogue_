@@ -18,7 +18,7 @@ if (!defined('DB_NAME')) {
 }
 
 // Establish database connection
-$connection = mysqli_connect($DB_SERVER,$DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+$connection = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
 
 // Check if the connection was successful
 if (!$connection) {
