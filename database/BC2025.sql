@@ -143,7 +143,7 @@ CREATE TABLE `Publishing` (
   `user_id` INT(11),
   `year_published` YEAR,
   `book_title` VARCHAR(255),
-  'content' VARCHAR (1000000),
+  `content` VARCHAR (1000000),
   PRIMARY KEY (`publishing_id`),
   FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
