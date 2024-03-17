@@ -5,9 +5,83 @@
   <title>My Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="css/library.css" rel="stylesheet">
+
+
+  <style>
+        /* Header Styles */
+.top-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5c48ee;
+    color: #fff;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffd700;
+}
+</style>
 </head>
 
 <body>
+  <!--header part-->
+  <section class="top-section">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1><br> <h3></h3>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+            <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard"><li>Home</li></a>
+            <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
+                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
+                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
+                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
+                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
+                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+            </ul>
+        </nav>
+</section>
+
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
     <button class="btn me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
       <span class="navbar-toggler-icon"></span>

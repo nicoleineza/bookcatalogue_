@@ -14,10 +14,10 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         
         <!-- title of site -->
-        <title>Competition Page</title>
+        <title>Competitions Page</title>
 
         <!--style.css-->
-        <link rel="stylesheet" href="/bookcatalogue_/css/competition.css">
+        <link rel="stylesheet" href="../css/competition.css">
 
         <style>
     .usersTableContainer {
@@ -47,6 +47,57 @@
     .usersTable th:last-child {
         width: 100px;
     }
+
+   
+        /* Header Styles */
+.top-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5c48ee;
+    color: #fff;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffd700;
+}
+
 </style>
 
     </head>
@@ -55,6 +106,25 @@
 
 
 <body>
+<section class="top-section">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1><br> <h3></h3>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+            <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard"><li>Home</li></a>
+            <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
+                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
+                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
+                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
+                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
+                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+            </ul>
+        </nav>
+</section>
 
 
 
@@ -85,7 +155,7 @@
 
 <!-- Table to display users -->
 <?php
-    include ('../actions/competition_action.php');
+    include '../actions/competition_action.php';
     if ($userData !== null) {
         echo '<div class="usersTableContainer">
             <table class="usersTable">
