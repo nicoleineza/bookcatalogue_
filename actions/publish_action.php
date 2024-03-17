@@ -8,7 +8,7 @@ function addStory($author, $year, $title, $content) {
     $user_id=$_SESSION['user_id'];
     
     $stmt = $conn->prepare("INSERT INTO Publishing (user_id, year_published, book_title, content) VALUES ('user_id', ?, ?, ?)");
-    $stmt->bind_param("isis", $author, $year, $title, $content);
+    $stmt->bind_param("iiss", $author, $year, $title, $content);
     
     if ($stmt->execute() === TRUE) {
         return true;

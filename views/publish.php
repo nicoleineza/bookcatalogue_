@@ -16,8 +16,8 @@
         <label for="content">Content:</label><br>
         <textarea id="content" name="content"></textarea><br>
         
-        <label for="author">Your Name:</label><br>
-        <input type="text" id="author" name="author"><br>
+        <label for="year">Year:</year><br>
+        <textarea id="year" name="year"></textarea><br>
         
         <input type="submit" name="submit" value="Submit">
     </form>
