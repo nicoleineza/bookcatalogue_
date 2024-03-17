@@ -66,7 +66,7 @@ if(isset($_POST['login'])){
                 
 
                 //Leading the user to the dashboard
-                header("Location:bookcatalogue_/views/dashboard.php");
+                header("Location:../views/dashboard.php");
                 
             }    
 

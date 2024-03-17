@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page - Gringotts</title>
-    <link rel="stylesheet" href="bookcatalogue_/css/login.css" />
+    <link rel="stylesheet" href="/bookcatalogue_/css/login.css" />
     <style>
       :root {
         --primary-color: #5c48ee;
@@ -74,7 +74,7 @@
   <body>
     <div id="header"><h1>Welcome to Gringotts</h1></div>
     <div class="container">
-      <form id="loginForm" name="login" action="../actions/login_user_action.php" method="POST">
+      <form id="loginForm" name="login" action="/bookcatalogue_/actions/login_user_action.php" method="POST">
         <label for="email">email</label>
         <input
           name="email"
@@ -106,7 +106,7 @@
             alert("Please fill in all fields");
           } else {
             // Redirect to dashboard.html
-            window.location.href = "dashboard.php";
+            window.location.href = "/bookcatalogue_/views/dashboard.php";
           }
         });
     </script>
