@@ -1,0 +1,94 @@
+
+:root{
+    --primary-color:#5c48ee;
+    --primary-color-dark:#0f1e6a;
+    --secondary-color:#f9fafe;
+    --text-color:#333333;
+    --white:#ffffff;
+    --max-width:1200px;
+
+
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+*{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+body{
+	font-family: 'Poppins', sans-serif;
+	font-size:14px;
+    text-transform:initial;
+    max-width:1920px;
+    margin:0 auto;
+	overflow-x:hidden;
+}
+
+.welcome-hero {
+    position: relative;
+    overflow: hidden; /* Ensure video doesn't overflow */
+    z-index: 1;
+}
+
+.welcome-hero video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%; /* Set minimum width to cover the entire viewport */
+    min-height: 100%; /* Set minimum height to cover the entire viewport */
+    width: auto;
+    height: auto;
+    z-index: -1;
+}
+
+.welcome-hero-txt { padding-top: 155px;}
+
+.welcome-hero-txt h2 {
+    font-size: 48px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+    line-height: 1.4;
+}
+.welcome-hero-txt p {
+    font-size: 18px;
+    color: #fcfcfc;
+    margin-top: 25px;
+}
+
+
+.welcome-hero-btn {
+    display:  flex;
+    justify-content:  center;
+    align-items:  center;
+    font-size:  14px;
+    color:  #fff;
+    width:  170px;
+    height:  50px;
+    background: var(--primary-color);
+    text-transform:  capitalize;
+    margin-left:  30px;
+    border-radius: 3px;
+    -webkit-transition: 0.3s linear; 
+    -moz-transition: 0.3s linear; 
+    -ms-transition: 0.3s linear; 
+    -o-transition: 0.3s linear; 
+    transition: 0.3s linear;
+}
+.welcome-hero-btn:hover{/*background: #fd4043;*/background:var(--primary-color-dark);}
+
+.welcome-hero-btn svg {
+    width:  14px;
+    height:  auto;
+    margin-left:  12px;
+}
