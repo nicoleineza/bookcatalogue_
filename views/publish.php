@@ -15,7 +15,7 @@ include ('../settings/core.php');
 <body>
 <body>
     <h2>Your first step to being an author, maybe?</h2>
-    <form method="post" action="../bookcatalogue_/action/publish_action.php">
+    <form method="post" action="../action/publish_action.php">
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title"><br>
         

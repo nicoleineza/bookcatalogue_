@@ -4,9 +4,22 @@
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
 $userID = 1;
 
-include ('../functions/statuscheck.php');
+include '../functions/statuscheck.php';
+include '../functions/display_categories_dropdown.php';
+include '../functions/show_reviews.php';
 
+$query = "SELECT ReviewText, Rating FROM reviews WHERE UserID = ? AND BookID = ?";
+$stmt = $connection->prepare($query);
+$stmt->bind_param('ii', $userID, $bookID);
+$stmt->execute();
+$result = $stmt->get_result();
+$review = $result->fetch_assoc();
 
+$reviewText = isset($review['ReviewText']) ? $review['ReviewText'] : '';
+//echo $reviewText;
+$rating = isset($review['Rating']) ? $review['Rating'] : '';
+
+$stmt->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +31,82 @@ include ('../functions/statuscheck.php');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
+
+<style>
+        /* Header Styles */
+.top-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5c48ee;
+    color: #fff;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffd700;
+}
+</style>
+
+
 <body>
+
+<section class="top-section">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1><br> <h3></h3>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard">Home</a></li>
+                <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
+                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
+                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
+                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
+                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
+                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+            </ul>
+        </nav>
+</section>
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
         <button class="btn me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
             <span class="navbar-toggler-icon"></span>
@@ -154,29 +242,22 @@ include ('../functions/statuscheck.php');
                         Add to Categories
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><input class="form-check-input" type="checkbox" value="" id="favourites"><label class="form-check-label" for="favourites">Favourites</label></li>
-                        <li><input class="form-check-input" type="checkbox" value="" id="summerTrip"><label class="form-check-label" for="summerTrip">For Summer Trip</label></li>
-                        <!-- Add more categories as needed -->
+                        <?php display_categories_dropdown($userID, $bookID); ?>
                     </ul>
                 </div>
                 <br>
                 <span style="margin-left: 100px;">Rate this book</span>
                 <div id="full-stars-example">
                     <div class="rating-group">
-                        <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" type="radio">
+                        <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" type="radio" <?= $rating === null ? 'checked' : '' ?>>
                         <label aria-label="No rating" class="rating__label" for="rating-none"><i class="rating__icon rating__icon--none fa fa-ban"></i></label>
-                        <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
-                        <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
-                        <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="rating" id="rating-3" value="3" type="radio" checked>
-                        <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
-                        <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                            <label aria-label="<?= $i ?> star" class="rating__label" for="rating-<?= $i ?>"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-<?= $i ?>" value="<?= $i ?>" type="radio" <?= $i == $rating ? 'checked' : '' ?>>
+                        <?php endfor; ?>
                     </div>
                 </div>
+
 
             </div>
 
@@ -184,33 +265,23 @@ include ('../functions/statuscheck.php');
                 <div>
                     <h2 style="color: #333;"><?= htmlspecialchars($title) ?></h2>
                     <p style="font-size: 18px; color: #555;"><strong>Author:</strong> <?= htmlspecialchars($author) ?></p>
-                    <p style="text-align: justify; color: #666;"><?= htmlspecialchars($description) ?></p>
+                    <p style="text-align: justify; color: #666;"><?= $description ?></p>
                     <p style="color: #777;"><strong>First published on:</strong> <?= htmlspecialchars($publicationDate) ?></p>
                     <p style="color: #777;"><strong>ISBN:</strong> <?= htmlspecialchars($isbn) ?></p>
                 </div>
 
                 <hr>
                 <h3>Write a Review</h3>
-                <textarea id="reviewText" class="form-control" rows="5" maxlength="4000" placeholder="Write your review here..."></textarea>
+                <textarea id="reviewText" class="form-control" rows="5" maxlength="4000" placeholder="Write your review here..."><?= htmlspecialchars($reviewText) ?></textarea>
+
+                <br>
+                <div id="alert"></div>
                 <button id="submitReview" class="btn btn-primary mt-3">Submit Review</button>
                 <hr>
                 <h3>Reviews</h3>
                 <div id="reviews">
-                    <div class="media mt-3">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReHlx51nzRyT2IGzXt9Ow0uUOOTCEAXlPejZhQLm1aAw&s" class="mr-3 rounded-circle" alt="Profile Photo" style="width: 40px; height: 40px;">
-                        <div class="media-body">
-                            <h5 class="mt-0">User Name</h5>
-                            <div class="rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                            <p>User's review goes here...</p>
-                            <small class="text-muted">Posted on January 1, 2020</small>
-                        </div>
-                    </div>
+                    <?php showReviews($bookID);?>
+                </div>
 
                 </div>
             </div>
@@ -251,6 +322,78 @@ include ('../functions/statuscheck.php');
                 error: function(xhr, status, error) {
                     // Handle errors
                     alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
+
+    function updateCategory(categoryID, isChecked) {
+        var bookID = <?= $bookID ?>;
+        $.ajax({
+            url: '../actions/update_category.php',
+            type: 'post',
+            data: {
+                'bookID': bookID,
+                'categoryID': categoryID,
+                'isChecked': isChecked
+            },
+            success: function(response) {
+                alert(response);
+            }
+        });
+
+
+    }
+
+    $(document).ready(function() {
+        // Event handler for rating change
+        $('input[name=rating]').change(function() {
+            var rating = $(this).val();
+            var bookId = <?= $bookID ?>;
+            var userId = 1; // replace with actual user ID
+
+            // If the "No rating" radio button is selected, set rating to null
+            if (rating === 'no-rating') {
+                rating = 0;
+            }
+
+            $.ajax({
+                url: '../actions/submit_review.php',
+                type: 'post',
+                data: {
+                    'rating': rating,
+                    'bookId': bookId,
+                    'userId': userId
+                },
+                success: function(response) {
+                    $('#alert').html('<div class="alert alert-success" role="alert">' + response + '</div>');
+                }
+            });
+        });
+
+        // Event handler for review submission
+        $('#submitReview').click(function() {
+            var reviewText = $('#reviewText').val();
+            var bookId = <?= $bookID ?>;
+            var userId = 1; 
+
+            // Include the current rating
+            var rating = $('input[name=rating]:checked').val();
+            if (rating === 'no-rating') {
+                rating = 0;
+            }
+
+            $.ajax({
+                url: '../actions/submit_review.php',
+                type: 'post',
+                data: {
+                    'reviewText': reviewText,
+                    'rating': rating,
+                    'bookId': bookId,
+                    'userId': userId
+                },
+                success: function(response) {
+                    $('#alert').html('<div class="alert alert-success" role="alert">' + response + '</div>');
                 }
             });
         });
