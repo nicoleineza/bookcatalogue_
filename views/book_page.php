@@ -2,7 +2,7 @@
 //include ('../settings/connection.php');
 
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
-$userID = 1;
+$userID = $_SESSION['user_id'];
 
 include '../functions/statuscheck.php';
 include '../functions/display_categories_dropdown.php';
@@ -351,7 +351,7 @@ $stmt->close();
         $('input[name=rating]').change(function() {
             var rating = $(this).val();
             var bookId = <?= $bookID ?>;
-            var userId = 1; // replace with actual user ID
+            var userId = <?= $_SESSION['user_id'] ?>; // replace with actual user ID
 
             // If the "No rating" radio button is selected, set rating to null
             if (rating === 'no-rating') {
@@ -376,7 +376,7 @@ $stmt->close();
         $('#submitReview').click(function() {
             var reviewText = $('#reviewText').val();
             var bookId = <?= $bookID ?>;
-            var userId = 1; 
+            var userId = <?= $_SESSION['user_id'] ?>; 
 
             // Include the current rating
             var rating = $('input[name=rating]:checked').val();

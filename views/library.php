@@ -1,5 +1,9 @@
+
 <?php
 include ('../settings/core.php');
+include '../functions/display_categories.php';
+error_reporting(0); //because php throws an error indicating a file path issue
+//even though the application is still functional
 
 ?>
 
@@ -13,78 +17,95 @@ include ('../settings/core.php');
 
 
   <style>
-        /* Header Styles */
-.top-section {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #5c48ee;
-    color: #fff;
-   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
+    /* Header Styles */
+    .top-section {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #5c48ee;
+      color: #fff;
 
-.logo {
-    display: flex;
-    align-items: center; 
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
 
-.logo img {
-    width: 40px; 
-    height: auto; 
-    margin-right: 10px; 
-}
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-.logo h1 {
-    font-size: 24px;
-}
+    .logo img {
+      width: 40px;
+      height: auto;
+      margin-right: 10px;
+    }
 
-.nav ul {
-    list-style: none;
-    display: flex;
-}
+    .logo h1 {
+      font-size: 24px;
+    }
 
-.nav ul li {
-    margin-right: 20px;
-}
+    .nav ul {
+      list-style: none;
+      display: flex;
+    }
 
-.nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    transition: color 0.3s;
-}
+    .nav ul li {
+      margin-right: 20px;
+    }
 
-.nav ul li a:hover {
-    color: #ffd700;
-}
-</style>
+    .nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .nav ul li a:hover {
+      color: #ffd700;
+    }
+  </style>
 </head>
 
 <body>
   <!--header part-->
   <section class="top-section">
-        <div class="logo">
-            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
-            <h1>GRINGOTTS</h1><br> <h3></h3>
-        </div>
-        
-        <nav class="nav">
-            <ul>
-            <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard"><li>Home</li></a>
-            <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
-                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
-                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
-                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
-                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
-                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
-                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
-            </ul>
-        </nav>
-</section>
+    <div class="logo">
+      <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+      <h1>GRINGOTTS</h1><br>
+      <h3></h3>
+    </div>
+
+    <nav class="nav">
+      <ul>
+        <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard">
+          <li>Home</li>
+        </a>
+        <a href="/bookcatalogue_/views/library.php" class="nav-link">
+          <li>Library</li>
+        </a>
+        <a href="/bookcatalogue_/views/setgoal.php" class="nav-link">
+          <li>Goals</li>
+        </a>
+        <a href="/bookcatalogue_/views/competitions.php" class="nav-link">
+          <li>Competitions</li>
+        </a>
+        <a href="/bookcatalogue_/views/search.php" class="nav-link">
+          <li>Search</li>
+        </a>
+        <a href="/bookcatalogue_/views/discover.php" class="nav-link">
+          <li>Discover</li>
+        </a>
+        <a href="/bookcatalogue_/views/profile.php" class="nav-link">
+          <li>Profile</li>
+        </a>
+        <a href="/bookcatalogue_/login/logout_view.php">
+          <li class="logout">Sign out</li>
+        </a>
+      </ul>
+    </nav>
+  </section>
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -216,7 +237,7 @@ include ('../settings/core.php');
             <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
           </svg> Library</h5>
         <div id="side-bar" class="list-group">
-          <?php include "../functions/display_categories.php"; ?>
+          <?= display_categories(1); ?>
           <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             Add
             <i style="margin-left: 220px">
@@ -264,7 +285,7 @@ include ('../settings/core.php');
   <script>
     $("#addCategoryModal .btn-primary").click(function() {
       var categoryName = $("#addCategoryModal .form-control").val();
-      var userID = 1;
+      var userID = <?= $_SESSION['user_id'] ?>;
 
       $.ajax({
         type: "POST",
@@ -280,7 +301,7 @@ include ('../settings/core.php');
     });
     $(document).on('click', '.category', function() {
       var categoryID = $(this).data('category-id');
-      var userID = 1;
+      var userID = <?= $_SESSION['user_id'] ?>;
 
       $.ajax({
         type: "POST",
@@ -298,7 +319,7 @@ include ('../settings/core.php');
     $(document).ready(function() {
       $('#search-input').keyup(function() {
         var searchValue = $(this).val();
-        var userID = 1;
+        var userID = <?= $_SESSION['user_id'] ?>;
 
         if (searchValue.trim() !== '') {
           $('#book-container').hide();

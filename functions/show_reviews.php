@@ -1,7 +1,7 @@
 <?php
 function showReviews($bookID)
 {
-    global $db; // Use the $conn from the included connection file
+    global $connection; // Use the $conn from the included connection file
 
     // Prepare the SQL statement
     $sql = "SELECT users.firstname, users.lastname,  reviews.ReviewText, reviews.Rating, reviews.ReviewDate 
@@ -16,7 +16,7 @@ function showReviews($bookID)
     WHERE reviews.BookID = ?"; */
 
     // Create a prepared statement
-    $stmt = $db->prepare($sql);
+    $stmt = $connection->prepare($sql);
 
     // Bind parameters
     $stmt->bind_param("i", $bookID);
