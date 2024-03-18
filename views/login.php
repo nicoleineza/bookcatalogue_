@@ -30,14 +30,31 @@
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
-      </div>
-      <button type="submit">Login</button>
-    </form>
-    don't have an account?
-    <button onclick="location.href='/bookcatalogue_/views/signup.php';" type="button" class="btn btn-secondary">Sign Up</button>
-  </div>
-  
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+        <input
+          type="password"
+          name="psw"
+          id="password"
+          class="input"
+          placeholder="Enter your password"
+          required
+        />
+        <button type="submit" id="login" name="login">Login</button>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", function (event) {
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+
+          if (!username || !password) {
+            alert("Please fill in all fields");
+          } else {
+            // Redirect to dashboard.html
+            window.location.href = "/bookcatalogue_/views/dashboard.php";
+          }
+        });
+    </script>
+  </body>
 </html>

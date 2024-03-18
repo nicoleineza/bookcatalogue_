@@ -35,7 +35,7 @@ if(isset($_POST['login'])){
         
             array_push($errors, "User not found!!");
 
-            header("Location: ../login/Register_view.php");
+            header("Location: ..views/signup.php");
             die();
         }
 
@@ -66,7 +66,7 @@ if(isset($_POST['login'])){
                 
 
                 //Leading the user to the dashboard
-                header("Location:../views/dashboard.php");
+                header("Location:../views/dashboardcopy.php");
                 
             }    
 

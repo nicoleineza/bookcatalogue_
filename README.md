@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gringotts is a book catalogue application that functions similarly to Goodreads. Users can add books to categories, create their own categories, write reviews, join competitions, and win awards.
+Gringotts is a comprehensive book catalogue application. It provides a platform for book enthusiasts to explore and interact with a wide range of books. Users can add books to categories, create their own categories, write reviews, join competitions, and win awards.
 
 ## Features
 
@@ -25,5 +25,7 @@ Gringotts is a book catalogue application that functions similarly to Goodreads.
 1. Clone the repository in your XAMP htdocs folder.
 2. Load database file in phpmyadmin.
 3. Run the web application with XAMP and MYSQL running.
+
+
 
 A link to the GitHub repository can be found [here](https://github.com/nicoleineza/bookcatalogue_/).

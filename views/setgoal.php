@@ -1,5 +1,8 @@
 <?php
 
+include ('../settings/core.php');
+
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/bookcatalogue_/settings/connection.php';
 
 if (!$connection) {
@@ -37,8 +40,79 @@ if ($result_annual && mysqli_num_rows($result_annual) > 0) {
     <title>Goal Tracking</title>
     <link rel="stylesheet" type="text/css" href="/bookcatalogue_/css/setgoal.css">
 
+    <style>
+        /* Header Styles */
+.top-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5c48ee;
+    color: #fff;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffd700;
+}
+</style>
+
 </head>
 <body>
+<section class="top-section">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1><br> <h3></h3>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+            <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard"><li>Home</li></a>
+            <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
+                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
+                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
+                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
+                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
+                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+            </ul>
+        </nav>
+</section>
+
     <h1>Goal Tracking</h1>
     
     <!-- Set Annual Goal Form -->

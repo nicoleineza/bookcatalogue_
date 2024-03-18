@@ -5,16 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Books</title>
     <link rel="stylesheet" type="text/css" href="/bookcatalogue_/css/discover.css">
+
+     <!--Header styles-->
+        
+     <style>
+.top-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5c48ee;
+    color: #fff;
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffd700;
+}
+
+</style>
 </head>
 <body>
+<section class="top-section">
+        <div class="logo">
+            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
+            <h1>GRINGOTTS</h1><br> <h3></h3>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+            <a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard"><li>Home</li></a>
+            <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
+                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
+                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
+                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
+                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
+                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+            </ul>
+        </nav>
+</section>
+
 
 <div class="container">
     <h1><em>DISCOVER YOUR NEXT GREAT READ</em></h1>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search for books...">
-        <button type="submit">Search</button>
-    </div>
+    
 
     <div class="genre">
         <h2>ROMANCE</h2>
