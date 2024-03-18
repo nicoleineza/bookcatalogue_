@@ -16,7 +16,7 @@ $otherCategoryIDs = array_map(function($row) {
 
 function display_categories_dropdown($userID, $bookID)
 {
-    $connection = $GLOBALS['connection'];
+    global $connection;
     $otherCategoryIDs = $GLOBALS['otherCategoryIDs'];
 
     // Prepare the query
