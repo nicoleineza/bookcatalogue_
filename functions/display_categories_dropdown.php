@@ -2,7 +2,7 @@
 // Fetch the CategoryIDs for the book and user
 $query = "SELECT CategoryID FROM bookcategories WHERE UserID = ? AND BookID = ?
             AND CategoryID NOT IN (1, 2, 3);";
-$stmt = $db->prepare($query);
+$stmt = $connection->prepare($query);
 $stmt->bind_param("ii", $userID, $bookID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -16,7 +16,7 @@ $otherCategoryIDs = array_map(function($row) {
 
 function display_categories_dropdown($userID, $bookID)
 {
-    $db = $GLOBALS['db'];
+    $connection = $GLOBALS['connection'];
     $otherCategoryIDs = $GLOBALS['otherCategoryIDs'];
 
     // Prepare the query
@@ -25,7 +25,7 @@ function display_categories_dropdown($userID, $bookID)
           WHERE UserCategories.UserID = ? 
           AND Categories.CategoryID NOT IN (1, 2, 3);";
 
-    if ($stmt = $db->prepare($query)) {
+    if ($stmt = $connection->prepare($query)) {
         // Bind the parameter
         $stmt->bind_param("i", $userID);
 
@@ -39,7 +39,7 @@ function display_categories_dropdown($userID, $bookID)
             die("Query execution failed: " . $stmt->error);
         }
     } else {
-        die("failed: " . $db->error);
+        die("failed: " . $connection->error);
     }
     foreach ($categories as $category) {
         echo '<li><input class="form-check-input" type="checkbox" value="' . $category['CategoryID'] . '" id=' . $category["CategoryID"] . ' '. isTicked($otherCategoryIDs, $category["CategoryID"]) .' onclick="updateCategory(' . $category['CategoryID'] . ', this.checked)"> <label class="form-check-label" for="' . $category['Category'] . '">' . $category['Category'] . '</label></li>';
