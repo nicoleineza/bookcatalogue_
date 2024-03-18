@@ -9,6 +9,7 @@
  
   <link rel="stylesheet" href="/bookcatalogue_/css/login.css">
   <link rel="icon" href="/bookcatalogue_/assets/icons/logo.png">
+  <link rel="icon" href="/bookcatalogue_/assets/icons/logo.png">
 </head>
 <body>
   <div class="video-container">
