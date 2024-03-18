@@ -6,6 +6,7 @@ include ('../settings/connection.php');
 
 
 
+
     // Your SELECT query to fetch all chores
     $query = "SELECT
     U.firstname,

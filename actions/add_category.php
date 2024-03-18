@@ -1,5 +1,6 @@
 <?php
-include ('../settings/connection.php');
+include '../settings/connection.php';
+include '../settings/core.php';
 
 
  // Get the category name from the AJAX request
@@ -8,7 +9,7 @@ include ('../settings/connection.php');
 
  // Check if the category already exists
  $sql = "SELECT CategoryID FROM Categories WHERE Category = '$categoryName'";
- $result = $db->query($sql);
+ $result = $connection->query($sql);
 
  if ($result->num_rows > 0) {
      // If the category exists, get the CategoryID
@@ -18,20 +19,20 @@ include ('../settings/connection.php');
      // If the category does not exist, insert it into the Categories table
      $sql = "INSERT INTO Categories (Category) VALUES ('$categoryName')";
 
-     if ($db->query($sql) === TRUE) {
-         $categoryID = $db->insert_id;
+     if ($connection->query($sql) === TRUE) {
+         $categoryID = $connection->insert_id;
          echo "New category added";
      } else {
-         echo "Error: " . $sql . "<br>" . $db->error;
+         echo "Error: " . $sql . "<br>" . $connection->error;
      }
  }
 
  // Insert the new category into the UserCategories table
  $sql = "INSERT INTO UserCategories (UserID, CategoryID) VALUES ('$userID', '$categoryID')";
 
- if ($db->query($sql) === TRUE) {
+ if ($connection->query($sql) === TRUE) {
      echo "New record created successfully in UserCategories";
  } else {
-     echo "Error: " . $sql . "<br>" . $db->error;
+     echo "Error: " . $sql . "<br>" . $connection->error;
  }
 

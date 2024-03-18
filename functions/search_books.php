@@ -1,8 +1,8 @@
 <?php
-include ('../settings/connection.php');
+include '../settings/connection.php';
 
-// Assuming $db is the database connection variable from your 'connection.php' file
-
+// Assuming $connection is the database connection variable from your 'connection.php' file
+$connection = $GLOBALS['connection'];
 
 // Get the userID and search term from the POST variables
 $userID = $_POST['userID'];
@@ -10,7 +10,7 @@ $search = $_POST['search'];
 
 function search_books($userID, $search)
 {
-    global $connection;
+    $connection = $GLOBALS['connection'];
 
     $sql = "SELECT Books.* FROM Books 
             JOIN UserBooks ON Books.BookID = UserBooks.BookID 

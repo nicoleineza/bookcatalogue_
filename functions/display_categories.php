@@ -1,5 +1,6 @@
 <?php
 include '../settings/connection.php';
+include_once '../settings/core.php';
 
 function display_categories($userID)
 {

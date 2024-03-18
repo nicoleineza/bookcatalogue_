@@ -1,6 +1,6 @@
 <?php
 
-include ('../settings/core.php');
+include_once ('../settings/core.php');
 
 ?>
 
@@ -110,14 +110,16 @@ include ('../settings/core.php');
         
         <nav class="nav">
             <ul>
-                <li><a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard">Home</a></li>
+                <li><a href="/bookcatalogue_/views/dashboard.php" class="dashboard">Home</a></li>
                 <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
                 <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
                 <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
+                <a href="/bookcatalogue_/views/publish.php" class="nav-link"><li>Publish</li></a>
                 <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
                 <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
                 <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
                 <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
+                <?php //echo $_SESSION['user_id']?>
             </ul>
         </nav>
 </section>

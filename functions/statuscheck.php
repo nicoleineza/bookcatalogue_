@@ -17,7 +17,7 @@ if ($stmt = $connection->prepare($query)) {
 // Fetch the CategoryID for the book and user
 $query = "SELECT CategoryID FROM bookcategories WHERE UserID = ? AND BookID = ?";
 $stmt = $connection->prepare($query);
-$stmt->bind_param("ii", $_SESSION['user_id'], $bookID);
+$stmt->bind_param("ii", $userID, $bookID);
 $stmt->execute();
 $result = $stmt->get_result();
 $shelfCategoryID = $result->fetch_assoc()['CategoryID'] ?? 'None'; // Default to 'None' if no category is set

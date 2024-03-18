@@ -1,5 +1,6 @@
 <?php
 include '../settings/connection.php';
+include '../settings/core.php';
 $userID = $_SESSION['user_id'];
 
 // Get the data from the AJAX request

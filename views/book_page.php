@@ -1,5 +1,6 @@
 <?php
-//include ('../settings/connection.php');
+//include '../settings/connection.php';
+include '../settings/core.php';
 
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
 $userID = $_SESSION['user_id'];
@@ -7,7 +8,6 @@ $userID = $_SESSION['user_id'];
 include '../functions/statuscheck.php';
 include '../functions/display_categories_dropdown.php';
 include '../functions/show_reviews.php';
-
 
 $query = "SELECT ReviewText, Rating FROM reviews WHERE UserID = ? AND BookID = ?";
 $stmt = $connection->prepare($query);
@@ -32,82 +32,7 @@ $stmt->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-
-<style>
-        /* Header Styles */
-.top-section {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #5c48ee;
-    color: #fff;
-   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.logo {
-    display: flex;
-    align-items: center; 
-}
-
-.logo img {
-    width: 40px; 
-    height: auto; 
-    margin-right: 10px; 
-}
-
-.logo h1 {
-    font-size: 24px;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-}
-
-.nav ul li {
-    margin-right: 20px;
-}
-
-.nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-.nav ul li a:hover {
-    color: #ffd700;
-}
-</style>
-
-
 <body>
-
-<section class="top-section">
-        <div class="logo">
-            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
-            <h1>GRINGOTTS</h1><br> <h3></h3>
-        </div>
-        
-        <nav class="nav">
-            <ul>
-                <li><a href="/bookcatalogue_/views/dashboardcopy.php" class="dashboard">Home</a></li>
-                <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
-                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
-                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
-                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
-                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
-                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
-                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
-            </ul>
-        </nav>
-</section>
-
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
         <button class="btn me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
             <span class="navbar-toggler-icon"></span>
@@ -376,7 +301,7 @@ $stmt->close();
         $('#submitReview').click(function() {
             var reviewText = $('#reviewText').val();
             var bookId = <?= $bookID ?>;
-            var userId = <?= $_SESSION['user_id'] ?>; 
+            var userId = <?= $_SESSION['user_id'] ?>;
 
             // Include the current rating
             var rating = $('input[name=rating]:checked').val();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3390
--- Generation Time: Mar 17, 2024 at 12:20 AM
+-- Generation Time: Mar 18, 2024 at 04:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,9 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `book_catalogue`
+-- Database: `bc2025`
 --
-
 CREATE DATABASE IF NOT EXISTS `BC2025` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `BC2025`;
 
@@ -53,7 +52,7 @@ CREATE TABLE `bookcategories` (
 --
 
 INSERT INTO `bookcategories` (`UserID`, `BookID`, `CategoryID`) VALUES
-(1, 1, 1),
+(1, 1, 3),
 (1, 2, 2),
 (1, 3, 3),
 (1, 4, 1),
@@ -130,6 +129,14 @@ CREATE TABLE `goals` (
   `achieved` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `goals`
+--
+
+INSERT INTO `goals` (`goal_id`, `user_id`, `goal_type`, `goal_value`, `achieved`) VALUES
+(1, 0, 'annual', 643, 0),
+(2, 0, 'monthly', 54, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -151,15 +158,12 @@ CREATE TABLE `progress` (
 -- Table structure for table `publishing`
 --
 
--- Publishing Table
-CREATE TABLE `Publishing` (
-  `publishing_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `user_id` INT(11),
-  `year_published` YEAR,
-  `book_title` VARCHAR(255),
-  `content` VARCHAR (1000000),
-  PRIMARY KEY (`publishing_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`)
+CREATE TABLE `publishing` (
+  `publishing_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `year_published` year(4) DEFAULT NULL,
+  `book_title` varchar(255) DEFAULT NULL,
+  `content` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -273,7 +277,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `gender`, `dob`, `phone`, `psw`) VALUES
-(1, 'Joel', 'Kodji', 'joelkodji123@gmail.com', 0, '0000-00-00', '02515611811', 'johnny');
+(1, 'Joel', 'Kodji', 'joelkodji123@gmail.com', 0, '2024-03-15', '0245712258', '$2y$10$Dv3oHEOOWY0fv/1bY5iEU.DTXXAXTA5z8mtGPbhoMJK/y9QTxQ5zC');
 
 --
 -- Indexes for dumped tables
@@ -397,7 +401,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `goals`
 --
 ALTER TABLE `goals`
-  MODIFY `goal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `goal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `progress`
@@ -409,13 +413,13 @@ ALTER TABLE `progress`
 -- AUTO_INCREMENT for table `publishing`
 --
 ALTER TABLE `publishing`
-  MODIFY `publishing_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `publishing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `ReviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ReviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `summary`
@@ -427,7 +431,7 @@ ALTER TABLE `summary`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -440,16 +444,10 @@ ALTER TABLE `awards`
   ADD CONSTRAINT `awards_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `bookcategories`
+-- Constraints for table `publishing`
 --
-ALTER TABLE `bookcategories`
-  ADD CONSTRAINT `bookcategories_ibfk_1` FOREIGN KEY (`UserID`,`CategoryID`) REFERENCES `usercategories` (`UserID`, `CategoryID`);
-
---
--- Constraints for table `userphoto`
---
-ALTER TABLE `userphoto`
-  ADD CONSTRAINT `userphoto_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
+ALTER TABLE `publishing`
+  ADD CONSTRAINT `publishing_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

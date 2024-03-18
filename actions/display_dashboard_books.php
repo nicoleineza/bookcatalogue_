@@ -1,5 +1,6 @@
 <?php
 include '../settings/connection.php';
+//include '../settings/core.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
