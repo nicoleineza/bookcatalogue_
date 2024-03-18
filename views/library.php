@@ -285,7 +285,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
   <script>
     $("#addCategoryModal .btn-primary").click(function() {
       var categoryName = $("#addCategoryModal .form-control").val();
-      var userID = 1;
+      var userID = <?= $_SESSION['user_id'] ?>;
 
       $.ajax({
         type: "POST",
@@ -301,7 +301,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
     });
     $(document).on('click', '.category', function() {
       var categoryID = $(this).data('category-id');
-      var userID = 1;
+      var userID = <?= $_SESSION['user_id'] ?>;
 
       $.ajax({
         type: "POST",
@@ -319,7 +319,7 @@ error_reporting(0); //because php throws an error indicating a file path issue
     $(document).ready(function() {
       $('#search-input').keyup(function() {
         var searchValue = $(this).val();
-        var userID = 1;
+        var userID = <?= $_SESSION['user_id'] ?>;
 
         if (searchValue.trim() !== '') {
           $('#book-container').hide();

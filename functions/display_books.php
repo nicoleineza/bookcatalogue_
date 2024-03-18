@@ -2,7 +2,7 @@
 include ('../settings/connection.php');
 
 // Get the userID and categoryID from the POST variables, if they're set
-$userID = isset($_POST['userID']) ? $_POST['userID'] : 1; // default to 1
+$userID = isset($_POST['userID']) ? $_POST['userID'] : $_SESSION['user_id']; // default to 1
 $categoryID = isset($_POST['categoryID']) ? $_POST['categoryID'] : 'all'; // default to 'all'
 
 // SQL query to retrieve books based on user ID and optionally category ID
