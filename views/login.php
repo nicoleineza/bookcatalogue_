@@ -30,8 +30,8 @@
         <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+        <label for="psw">Password:</label>
+        <input type="psw" name="psw" id="psw" class="form-control" placeholder="Enter your password" required>
       </div>
       <button type="submit" name="login">Login</button>
     </form>
