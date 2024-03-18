@@ -12,9 +12,9 @@ $errors = array();
 
 
 
-if (isset($_POST['login'])) {
-
-    echo "Errors!!";
+if(isset($_POST['login'])){
+   
+   
 
     //Collecting form data and storing in variables
     $email = mysqli_real_escape_string($connection, $_POST['email']);
