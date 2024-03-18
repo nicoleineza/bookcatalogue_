@@ -104,7 +104,7 @@ if (!empty($errors)) {
         if ($insertResult) {
             // Redirect to login_view page upon successful registration
             $success_message = 'Registeration was successfull!!';
-            header("Location: ../views/login.php");
+            header("Location:../views/login.php");
             exit();
         } else {
             // Display an error message and redirect back to register_view page
@@ -115,7 +115,7 @@ if (!empty($errors)) {
                 }
 
             
-            header("Location: ../bookcatalogue_/views/signup.php");
+            header("Location:../views/signup.php");
             exit();
         }
     } 

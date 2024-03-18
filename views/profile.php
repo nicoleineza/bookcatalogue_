@@ -1,112 +1,120 @@
+<?php
+session_start();
+
+// Redirect to login page if user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /login.php");
+    exit();
+}
+
+include "../settings/connection.php";
+
+$user = null;
+
+// Fetch user details from the database
+$get_user_query = "SELECT user_id, firstname, lastname, email, gender, dob, phone FROM Users WHERE user_id = {$_SESSION['user_id']}";
+$get_user_result = $connection->query($get_user_query);
+
+// Check if query executed successfully and user details exist
+if ($get_user_result && $get_user_result->num_rows > 0) {
+    $user = $get_user_result->fetch_assoc(); // Fetch user details
+} else {
+    // Redirect to error page if user details are not found
+   
+    exit();
+}
+
+$connection->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="/bookcatalogue_/css/profile.css">
+    <title>Edit User</title>
 </head>
 <body>
-    <h1>User Profile</h1>
-    <?php
-    // Start the session
-    session_start();
+
+  <div class="content">
     
-    // Check if the user is logged in
-    if(isset($_SESSION['user_id'])) {
-        // Fetch user information from session
-        $user_id = $_SESSION['user_id'];
-        
-        // Include database connection
-        include_once '../settings/connection.php';
+    <section class="users-list-section">
+      <h2>My Profile</h2>
+      <!-- Users List -->
+      <ul class="users-list">
+        <li data-user-id='<?php echo $user['user_id']; ?>'>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "firstname")'>Edit</button>
+          <strong>First Name:</strong> <?php echo $user["firstname"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "lastname")'>Edit</button>
+          <strong>Last Name:</strong> <?php echo $user["lastname"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "email")'>Edit</button>
+          <strong>Email:</strong> <?php echo $user["email"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "gender")'>Edit</button>
+          <strong>Gender:</strong> <?php echo ($user["gender"] == 0 ? 'Male' : 'Female'); ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "dob")'>Edit</button>
+          <strong>Date of Birth:</strong> <?php echo $user["dob"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "phone")'>Edit</button>
+          <strong>Phone:</strong> <?php echo $user["phone"]; ?><br>
+          <button onclick='deleteUser(<?php echo $user['user_id']; ?>)'>Delete</button>
+        </li>
+      </ul>
+    </section>
 
-        $stmt = $connection->prepare("SELECT * FROM Users WHERE user_id = ?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    <!-- button to go back to the previous page -->
+    <button class="back-button" onclick="goToDashboard()">Back to Dashboard</button>
+  </div>
 
-        if($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-    ?>
-    <form id="profile-form" method="post" action="update_profile.php">
-        <label for="firstname">First Name:</label>
-        <div id="firstname-container">
-            <span id="firstname-value"><?php echo htmlspecialchars($user['firstname']); ?></span>
-            <button type="button" class="edit-btn" data-field="firstname">Edit</button>
-        </div>
+  <script>
+    function editUser(userId, attribute) {
+      var newValue = prompt('Edit ' + attribute + ':');
+      if (newValue !== null && newValue.trim() !== '') {
+        var formData = new FormData();
+        formData.append('newValue', newValue);
+        formData.append('attribute', attribute);
+        formData.append('userId', userId);
 
-        <label for="lastname">Last Name:</label>
-        <div id="lastname-container">
-            <span id="lastname-value"><?php echo htmlspecialchars($user['lastname']); ?></span>
-            <button type="button" class="edit-btn" data-field="lastname">Edit</button>
-        </div>
-
-        <label for="email">Email:</label>
-        <div id="email-container">
-            <span id="email-value"><?php echo htmlspecialchars($user['email']); ?></span>
-            <button type="button" class="edit-btn" data-field="email">Edit</button>
-        </div>
-
-        <label for="phone">Phone:</label>
-        <div id="phone-container">
-            <span id="phone-value"><?php echo htmlspecialchars($user['phone']); ?></span>
-            <button type="button" class="edit-btn" data-field="phone">Edit</button>
-        </div>
-
-        <!-- Add more fields as needed -->
-
-        <button type="submit" id="submit-btn" style="display: none;">Update Profile</button>
-    </form>
-
-    <script>
-    $(document).ready(function() {
-        // Edit button click event
-        $('.edit-btn').click(function() {
-            var field = $(this).data('field');
-            var container = $('#' + field + '-container');
-            var value = $('#' + field + '-value').text();
-
-            // Replace span with input field and submit button
-            container.html('<input type="text" id="' + field + '-input" name="' + field + '" value="' + value + '"> <button type="button" class="submit-btn">Submit</button>');
-
-            // Show submit button
-            $('#submit-btn').show();
+        fetch('/bookcatalogue_/functions/update_profile.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.reload(); // Reload the page to reflect changes
+          } else {
+            alert('Failed to update profile. Please try again.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to update profile. Please try again.');
         });
-
-        // Submit button click event
-        $(document).on('click', '.submit-btn', function() {
-            $('#profile-form').submit();
-        });
-
-        // Profile form submission
-        $('#profile-form').submit(function(event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-
-            $.ajax({
-                type: "POST",
-                url: "update_profile.php",
-                data: formData,
-                success: function(response) {
-                    // Reload page if update is successful
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-    </script>
-    <?php 
-        } else {
-            echo "<p>Error: User data not found.</p>";
-        }
-    } else {
-        // If the user is not logged in, display a message or redirect to the login page
-        echo "<p>Please login to view your profile.</p>";
-        // You can add a link to the login page here if needed
+      }
     }
-    ?>
+
+    function deleteUser(userId) {
+      if (confirm("Are you sure you want to delete your profile?")) {
+        fetch('/bookcatalogue_/functions/delete_profile.php', {
+          method: 'POST',
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = "/bookcatalogue/views/login.php"; // Redirect to login page after successful deletion
+          } else {
+            alert('Failed to delete profile. Please try again.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to delete profile. Please try again.');
+        });
+      }
+    }
+
+    function goToDashboard() {
+      window.location.href = "/bookcatalogue_/views/dashboardcopy.php";
+    }
+  </script>
 </body>
 </html>
