@@ -106,7 +106,7 @@
             alert("Please fill in all fields");
           } else {
             // Redirect to dashboard.html
-            window.location.href = "/bookcatalogue_/views/dashboard.php";
+            window.location.href = "/bookcatalogue_/views/dashboardcopy.php";
           }
         });
     </script>
