@@ -1,5 +1,5 @@
 <?php
-//include '../settings/connection.php';
+//include ('../settings/connection.php');
 
 $bookID = isset($_GET['bookID']) ? $_GET['bookID'] : die('Error: Book ID not specified.');
 $userID = 1;
@@ -7,7 +7,6 @@ $userID = 1;
 include '../functions/statuscheck.php';
 include '../functions/display_categories_dropdown.php';
 include '../functions/show_reviews.php';
-include '../actions/update_category.php';
 
 $query = "SELECT ReviewText, Rating FROM reviews WHERE UserID = ? AND BookID = ?";
 $stmt = $connection->prepare($query);
