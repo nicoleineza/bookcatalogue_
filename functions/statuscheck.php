@@ -1,4 +1,6 @@
 <?php
+include ('../settings/connection.php');
+
 $query = "SELECT CategoryID FROM bookcategories WHERE UserID = ? AND BookID = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("ii", $userID, $bookID);
