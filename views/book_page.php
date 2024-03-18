@@ -8,6 +8,7 @@ include '../functions/statuscheck.php';
 include '../functions/display_categories_dropdown.php';
 include '../functions/show_reviews.php';
 
+
 $query = "SELECT ReviewText, Rating FROM reviews WHERE UserID = ? AND BookID = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param('ii', $userID, $bookID);
