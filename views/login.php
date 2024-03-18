@@ -32,7 +32,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" name="login">Login</button>
     </form>
     don't have an account?
     <button onclick="location.href='/bookcatalogue_/views/signup.php';" type="button" class="btn btn-secondary">Sign Up</button>

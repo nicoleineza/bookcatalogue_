@@ -10,7 +10,7 @@ $errors = array();
 
 
 
-echo "Errors!!";
+
 
 if(isset($_POST['login'])){
    
