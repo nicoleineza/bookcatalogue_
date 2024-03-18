@@ -2,35 +2,6 @@
 
 include ('../settings/core.php');
 
-
-// Include database connection
-include "../settings/connection.php";
-
-// Fetch monthly goal value from the database if exists
-$sql_monthly = "SELECT goal_value FROM Goals WHERE goal_type = 'monthly'";
-$result_monthly = mysqli_query($connection, $sql_monthly);
-
-// Initialize variables for monthly goal value
-$monthly_goal_value = "No monthly goals set.";
-
-// Check if monthly goal exists
-if ($result_monthly && mysqli_num_rows($result_monthly) > 0) {
-    $row_monthly = mysqli_fetch_assoc($result_monthly);
-    $monthly_goal_value = $row_monthly['goal_value'];
-}
-
-// Fetch annual goal value from the database if exists
-$sql_annual = "SELECT goal_value FROM Goals WHERE goal_type = 'annual'";
-$result_annual = mysqli_query($connection, $sql_annual);
-
-// Initialize variables for annual goal value
-$annual_goal_value = "No annual goals set.";
-
-// Check if annual goal exists
-if ($result_annual && mysqli_num_rows($result_annual) > 0) {
-    $row_annual = mysqli_fetch_assoc($result_annual);
-    $annual_goal_value = $row_annual['goal_value'];
-}
 ?>
 
 
@@ -152,32 +123,7 @@ if ($result_annual && mysqli_num_rows($result_annual) > 0) {
 </section>
 
 
-<main class="main">
-        <aside class="sidebar">
-            <div class="user-info">
-                <?php
-                session_start();
-                if (isset($_SESSION['user_id'])) {
-                    $id = $_SESSION['user_id'];
-                    $query = "SELECT * FROM Users WHERE user_id = '$id'";
-                    $result = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h3>' . $row['firstname'] . ' ' . $row['lastname'] . '</h3>';
-                }
-                ?>
-            </div>
-        </aside>
-        <div class="content" id="page-content">
-            <!-- Dynamic content will be loaded here -->
-            <div class="goal-section">
-                <h2 class="goal-title">Current Monthly Goal:</h2>
-                <p class="goal-value"><?php echo $monthly_goal_value; ?></p>
-                <h2 class="goal-title">Current Annual Goal:</h2>
-                <p class="goal-value"><?php echo $annual_goal_value; ?></p>
-            </div>
 
-        </div>
-    </main>
 
 	<!-- Start Featured Slider -->
 
