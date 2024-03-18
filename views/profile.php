@@ -1,327 +1,120 @@
 <?php
 session_start();
 
+// Redirect to login page if user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /login.php");
+    exit();
+}
 
-// Include database connection
 include "../settings/connection.php";
 
-// Fetch monthly goal value from the database if exists
-$sql_monthly = "SELECT goal_value FROM Goals WHERE goal_type = 'monthly'";
-$result_monthly = mysqli_query($connection, $sql_monthly);
+$user = null;
 
-// Initialize variables for monthly goal value
-$monthly_goal_value = "No monthly goals set.";
+// Fetch user details from the database
+$get_user_query = "SELECT user_id, firstname, lastname, email, gender, dob, phone FROM Users WHERE user_id = {$_SESSION['user_id']}";
+$get_user_result = $connection->query($get_user_query);
 
-// Check if monthly goal exists
-if ($result_monthly && mysqli_num_rows($result_monthly) > 0) {
-    $row_monthly = mysqli_fetch_assoc($result_monthly);
-    $monthly_goal_value = $row_monthly['goal_value'];
+// Check if query executed successfully and user details exist
+if ($get_user_result && $get_user_result->num_rows > 0) {
+    $user = $get_user_result->fetch_assoc(); // Fetch user details
+} else {
+    // Redirect to error page if user details are not found
+   
+    exit();
 }
 
-// Fetch annual goal value from the database if exists
-$sql_annual = "SELECT goal_value FROM Goals WHERE goal_type = 'annual'";
-$result_annual = mysqli_query($connection, $sql_annual);
-
-// Initialize variables for annual goal value
-$annual_goal_value = "No annual goals set.";
-
-// Check if annual goal exists
-if ($result_annual && mysqli_num_rows($result_annual) > 0) {
-    $row_annual = mysqli_fetch_assoc($result_annual);
-    $annual_goal_value = $row_annual['goal_value'];
-}
+$connection->close();
 ?>
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Gringotts : Home</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <!-- Slick slider -->
-    <link href="../css/slick.css" rel="stylesheet">
-    <!-- Theme color -->
-    <link id="switcher" href="../css/theme-color/default-theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bookcatalogue_/css/profile.css">
+    <title>Edit User</title>
+</head>
+<body>
 
-    <!-- Main Style -->
-    <link href="../css/style.css" rel="stylesheet">
-
-    <!-- Fonts -->
-
-    <!-- Open Sans for body font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
-    <!-- Lato for Title -->
-  	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
- 
- 
-	
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <style>
-        /* Header Styles */
-.top-section {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #5c48ee;
-    color: #fff;
-   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.logo {
-    display: flex;
-    align-items: center; 
-}
-
-.logo img {
-    width: 40px; 
-    height: auto; 
-    margin-right: 10px; 
-}
-
-.logo h1 {
-    font-size: 24px;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-}
-
-.nav ul li {
-    margin-right: 20px;
-}
-
-.nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-.nav ul li a:hover {
-    color: #ffd700;
-}
-</style>
-  </head>
-
-  <body>
-
-  <section class="top-section">
-        <div class="logo">
-            <img src="/bookcatalogue_/assets/icons/logo.png" alt="GRINGOTTS Logo">
-            <h1>GRINGOTTS</h1><br> <h3></h3>
-        </div>
-        
-        <nav class="nav">
-            <ul>
-                <li><a href="/bookcatalogue_/views/dashboard.php" class="dashboard">Home</a></li>
-                <a href="/bookcatalogue_/views/library.php" class="nav-link" ><li>Library</li></a>
-                <a href="/bookcatalogue_/views/setgoal.php" class="nav-link" ><li>Goals</li></a>
-                <a href="/bookcatalogue_/views/competitions.php" class="nav-link"><li>Competitions</li></a>
-                <a href="/bookcatalogue_/views/search.php" class="nav-link"><li>Search</li></a>
-                <a href="/bookcatalogue_/views/discover.php" class="nav-link"><li>Discover</li></a>
-                <a href="/bookcatalogue_/views/profile.php" class="nav-link"><li>Profile</li></a>
-                <a href="/bookcatalogue_/login/logout_view.php"><li class="logout">Sign out</li></a>
-            </ul>
-        </nav>
-</section>
-
-
-<main class="main">
-        <aside class="sidebar">
-            <div class="user-info">
-                <?php
-                session_start();
-                if (isset($_SESSION['user_id'])) {
-                    $id = $_SESSION['user_id'];
-                    $query = "SELECT * FROM Users WHERE user_id = '$id'";
-                    $result = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_assoc($result);
-                    echo '<h3>' . $row['firstname'] . ' ' . $row['lastname'] . '</h3>';
-                }
-                ?>
-            </div>
-        </aside>
-        <div class="content" id="page-content">
-            <!-- Dynamic content will be loaded here -->
-            <div class="goal-section">
-                <h2 class="goal-title">Current Monthly Goal:</h2>
-                <p class="goal-value"><?php echo $monthly_goal_value; ?></p>
-                <h2 class="goal-title">Current Annual Goal:</h2>
-                <p class="goal-value"><?php echo $annual_goal_value; ?></p>
-            </div>
-
-        </div>
-    </main>
-
-	<!-- Start Featured Slider -->
-
-	<section id="mu-hero">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-md-6 col-sm-6 col-sm-push-6">
-					<div class="mu-hero-right">
-						<!--<img src="../assets/images/books.png" alt="Ebook img">-->
-					</div>
-				</div>
-
-				<div class="col-md-6 col-sm-6 col-sm-pull-6">
-					<div class="mu-hero-left">
-						<h1>Dive into worlds unknown and stories untold , your next adventure awaits.</h1>
-						
-						
-					</div>
-				</div>	
-
-			</div>
-		</div>
-	</section>
-	
-	<!-- Start Featured Slider -->
-	
-	<!-- Start main content -->
-		
-	<main role="main">
-
-		<!-- Start Counter -->
-		<section id="mu-counter">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="mu-counter-area">
-
-							<div class="mu-counter-block">
-								<div class="row">
-
-									<!-- Start Single Counter -->
-									<div class="col-md-3 col-sm-6">
-										<div class="mu-single-counter">
-											<i class="fa fa-files-o" aria-hidden="true"></i>
-                                            <?php
-                                            include '../actions/books_read_action.php';?>
-											<div class="counter-value" data-count="<?php echo $total_books_read; ?>"><?php echo $total_books_read; ?></div>
-											<h5 class="mu-counter-name">Books read</h5>
-										</div>
-									</div>
-									<!-- / Single Counter -->
-
-									<!-- Start Single Counter -->
-									<div class="col-md-3 col-sm-6">
-										<div class="mu-single-counter">
-											<i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                            <?php
-                                            include '../actions/genres_action.php';?>
-											<div class="counter-value" data-count="<?php echo $genres; ?>"><?php echo $genres; ?></div>
-											<h5 class="mu-counter-name">Genres Explored</h5>
-										</div>
-									</div>
-									<!-- / Single Counter -->
-
-									<!-- Start Single Counter -->
-									<div class="col-md-3 col-sm-6">
-										<div class="mu-single-counter">
-											<i class="fa fa-users" aria-hidden="true"></i>
-                                            <?php
-                                            include '../actions/currently_reading.php';?>
-											<div class="counter-value" data-count="<?php echo $currently_reading; ?>"><?php echo $currently_reading; ?></div>
-											<h5 class="mu-counter-name">Currently reading</h5>
-										</div>
-									</div>
-									<!-- / Single Counter -->
-
-									<!-- Start Single Counter -->
-									<div class="col-md-3 col-sm-6">
-										<div class="mu-single-counter">
-											<i class="fa fa-trophy" aria-hidden="true"></i>
-											<div class="counter-value" data-count="03">0</div>
-											<h5 class="mu-counter-name">Got Awards</h5>
-										</div>
-									</div>
-									<!-- / Single Counter -->
-
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- End Counter -->
-
-
-        <!-- Start Book Overview -->
-        <section id="mu-book-overview">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="mu-book-overview-area">
-
-							<div class="mu-heading-area">
-								<h2 class="mu-heading-title">Book Overview</h2>
-								<span class="mu-header-dot"></span>
-								<h3>The following are the books you have read so far</h3>
-                                <h3>Continue igniting your imagination, and exploring new worlds within the pages of a book!!!</h3>
-							</div>
-
-		 <!-- Start Book Overview Content -->
-         <div class="mu-book-overview-content">
-                        <div class="row">
-                            <?php
-                            include '../actions/display_dashboard_books.php';
-                            // Loop through the results and display book covers
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="col-md-3 col-sm-6">';
-                                    echo '<div class="mu-book-overview-single">';
-                                    echo '<img src="' . $row["Cover"] . '" alt="Book Cover">';
-                                    echo '</div>';
-                                    echo '</div>';
-                                }
-                            } else {
-                                echo "No books found.";
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <!-- End Book Overview Content -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Book Overview -->
-
-	
-
+  <div class="content">
     
-	
-    
-  </body>
+    <section class="users-list-section">
+      <h2>My Profile</h2>
+      <!-- Users List -->
+      <ul class="users-list">
+        <li data-user-id='<?php echo $user['user_id']; ?>'>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "firstname")'>Edit</button>
+          <strong>First Name:</strong> <?php echo $user["firstname"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "lastname")'>Edit</button>
+          <strong>Last Name:</strong> <?php echo $user["lastname"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "email")'>Edit</button>
+          <strong>Email:</strong> <?php echo $user["email"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "gender")'>Edit</button>
+          <strong>Gender:</strong> <?php echo ($user["gender"] == 0 ? 'Male' : 'Female'); ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "dob")'>Edit</button>
+          <strong>Date of Birth:</strong> <?php echo $user["dob"]; ?><br>
+          <button onclick='editUser(<?php echo $user['user_id']; ?>, "phone")'>Edit</button>
+          <strong>Phone:</strong> <?php echo $user["phone"]; ?><br>
+          <button onclick='deleteUser(<?php echo $user['user_id']; ?>)'>Delete</button>
+        </li>
+      </ul>
+    </section>
+
+    <!-- button to go back to the previous page -->
+    <button class="back-button" onclick="goToDashboard()">Back to Dashboard</button>
+  </div>
+
+  <script>
+    function editUser(userId, attribute) {
+      var newValue = prompt('Edit ' + attribute + ':');
+      if (newValue !== null && newValue.trim() !== '') {
+        var formData = new FormData();
+        formData.append('newValue', newValue);
+        formData.append('attribute', attribute);
+        formData.append('userId', userId);
+
+        fetch('/bookcatalogue_/functions/update_profile.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.reload(); // Reload the page to reflect changes
+          } else {
+            alert('Failed to update profile. Please try again.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to update profile. Please try again.');
+        });
+      }
+    }
+
+    function deleteUser(userId) {
+      if (confirm("Are you sure you want to delete your profile?")) {
+        fetch('/bookcatalogue_/functions/delete_profile.php', {
+          method: 'POST',
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = "/bookcatalogue/views/login.php"; // Redirect to login page after successful deletion
+          } else {
+            alert('Failed to delete profile. Please try again.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to delete profile. Please try again.');
+        });
+      }
+    }
+
+    function goToDashboard() {
+      window.location.href = "/bookcatalogue_/views/dashboardcopy.php";
+    }
+  </script>
+</body>
 </html>
