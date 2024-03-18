@@ -8,11 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'], $_POST['book
     $newStatus = $_POST['status'];
     $bookID = $_POST['bookID'];
 
-    $query = "SELECT * FROM userbooks WHERE bookID = ?";
+    $query = "SELECT * FROM userbooks WHERE bookID = ? AND userID = ?";
     $stmt = $connection->prepare($query);
-    $stmt->bind_param("i", $bookID);
+    $stmt->bind_param("ii", $bookID, $userID);
     $stmt->execute();
     $stmt_result = $stmt->get_result();
+    echo $stmt_result->num_rows;
     $stmt->close();
 
     if ($stmt_result->num_rows == 0) {
@@ -21,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'], $_POST['book
         $addBookStmt->bind_param("ii", $userID, $bookID);
         $addBookStmt->execute();
         $addBookStmt->close();
+        echo "done\n";
     }
 
     // Start transaction

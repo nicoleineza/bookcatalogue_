@@ -16,7 +16,6 @@ include '..settings/core.php';
 </head>
 
 <body>
-  <?=  $_SESSION['user_id'] ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
     <button class="btn me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
       <span class="navbar-toggler-icon"></span>

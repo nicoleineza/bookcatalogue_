@@ -14,7 +14,7 @@ function display_books($userID, $categoryID = 'all')
     $connection = $GLOBALS['connection'];
 
 
-    $sql = "SELECT Books.* FROM Books 
+    $sql = "SELECT DISTINCT Books.* FROM Books 
             JOIN UserBooks ON Books.BookID = UserBooks.BookID";
 
     // If a specific category is selected, join with the bookcategories table
