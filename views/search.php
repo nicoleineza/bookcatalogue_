@@ -1,4 +1,7 @@
+<?php
+include ('../settings/core.php');
 
+?>
 
 <!doctype html>
 <html class="no-js" lang="en">

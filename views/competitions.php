@@ -1,4 +1,9 @@
+<?php
+session_start();
 
+include ('../settings/core.php');
+
+?>
 
 <!doctype html>
 <html class="no-js" lang="en">

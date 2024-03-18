@@ -1,5 +1,8 @@
 <?php
 
+include ('../settings/core.php');
+
+
 include_once $_SERVER['DOCUMENT_ROOT'] . '/bookcatalogue_/settings/connection.php';
 
 if (!$connection) {
