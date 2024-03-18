@@ -15,7 +15,7 @@ if ($isChecked === 'true') {
     $query = "DELETE FROM bookcategories WHERE UserID = ? AND BookID = ? AND CategoryID = ?";
 }
 
-$stmt = $db->prepare($query);
+$stmt = $connection->prepare($query);
 $stmt->bind_param("iii", $userID, $bookID, $categoryID);
 
 // Execute the query
