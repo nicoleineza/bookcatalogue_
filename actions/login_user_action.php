@@ -35,7 +35,7 @@ if(isset($_POST['login'])){
         
             array_push($errors, "User not found!!");
 
-            header("Location: ..views/signup.php");
+            header("Location:..views/signup.php");
             die();
         }
 
