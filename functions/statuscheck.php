@@ -4,7 +4,7 @@ include '../settings/connection.php';
 // SQL query to fetch the book details
 $query = "SELECT Cover, Author, Title, ISBN, PublicationDate, `Description` FROM books WHERE BookID = ?";
 
-if ($stmt = $db->prepare($query)) {
+if ($stmt = $connection->prepare($query)) {
     $stmt->bind_param("i", $bookID);
 
     $stmt->execute();
@@ -16,7 +16,7 @@ if ($stmt = $db->prepare($query)) {
 }
 // Fetch the CategoryID for the book and user
 $query = "SELECT CategoryID FROM bookcategories WHERE UserID = ? AND BookID = ?";
-$stmt = $db->prepare($query);
+$stmt = $connection->prepare($query);
 $stmt->bind_param("ii", $userID, $bookID);
 $stmt->execute();
 $result = $stmt->get_result();
