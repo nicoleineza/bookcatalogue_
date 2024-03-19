@@ -14,29 +14,34 @@ function display_books($userID, $categoryID = 'all')
     $connection = $GLOBALS['connection'];
 
 
-    $sql = "SELECT DISTINCT Books.* FROM Books 
-            JOIN UserBooks ON Books.BookID = UserBooks.BookID";
 
-    // If a specific category is selected, join with the bookcategories table
+    // Prepare the base SQL query
+    $sql = "SELECT b.BookID, b.Author, b.Title, b.Genre, b.Cover, b.ISBN, b.PublicationDate, b.Description
+FROM books b
+JOIN bookcategories bc ON b.BookID = bc.BookID";
+
+    // If a specific category is selected, add the condition to the WHERE clause
     if ($categoryID !== 'all') {
-        $sql .= " JOIN BookCategories ON Books.BookID = BookCategories.BookID 
-                   AND BookCategories.CategoryID = ?";
+        $sql .= " WHERE bc.UserID = ? AND bc.CategoryID = ?";
+    } else {
+        $sql .= " WHERE bc.UserID = ?";
     }
 
-    $sql .= " WHERE UserBooks.UserID = ?";
-
+    // Prepare and execute the SQL statement with the appropriate parameters
     $stmt = $connection->prepare($sql);
 
+    // Bind parameters based on whether a specific category is selected or not
     if ($categoryID !== 'all') {
-        $stmt->bind_param("ii", $categoryID, $userID);
+        $stmt->bind_param("ii", $userID, $categoryID);
     } else {
         $stmt->bind_param("i", $userID);
     }
 
-    // Execute the query
     $stmt->execute();
-
     $result = $stmt->get_result();
+
+
+    //print_r($result);
 
     // Check if there are any books
     if ($result->num_rows > 0) {

@@ -127,7 +127,6 @@
             <h1 id="header">GRINGOTTS</h1> 
             <h1 >Welcome
             </h1>
-            <p id="result">head</p>
             <div class="input-box">
                 <div class="input-field">
                     <label for="firstname">Firstname</label>
